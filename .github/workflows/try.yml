@@ -23,11 +23,8 @@ jobs:
       #- uses: actions/checkout@master
       #  with:
       #    name: qiboteam/qibo 
-<<<<<<< HEAD
+
       - run: git clone https://github.com/qiboteam/qibo.git  
-=======
-      - run: git clone git@github.com:qiboteam/qibo.git   
->>>>>>> db94395921090df0a3b0660db0f340aae6cf288f
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:

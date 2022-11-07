@@ -37,7 +37,6 @@ jobs:
           cd qibo
           rm -rf .git
           rm -rf .github 
-          git rm --cache client_folder 
           ls -a
       - name: Commit & Push changes
         uses: actions-js/push@master

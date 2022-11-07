@@ -30,7 +30,7 @@ jobs:
         with:
           repository: qiboteam/qibo
           path: "~/"
-      #- run: git clone https://github.com/qiboteam/qibo.git
+      - run: git clone https://github.com/qiboteam/qibo.git
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:

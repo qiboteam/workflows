@@ -31,10 +31,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: qiboteam/qibo
-          
+
       - name: Download qibo  
         run: |
-          cd qibo
           rm -rf .git
           rm -rf .github 
       

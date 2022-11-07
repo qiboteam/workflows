@@ -28,7 +28,9 @@ jobs:
       - name: Deploy documentation
         run: |
           python -m pip install --upgrade pip
-          pip install pytest-cov
           pip install .[docs]
+      
+      # TODO: debug, remember to drop this
+      - run: ls -a doc
       
       

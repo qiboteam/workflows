@@ -39,9 +39,9 @@ jobs:
           ls -a
       
       - name: Deploy documentation
-        - uses: ammaraskar/sphinx-action@master
-          with:
-            docs-folder: "docs/"
+        uses: ammaraskar/sphinx-action@master
+        with:
+          docs-folder: "doc/"
       
       - name: Commit & Push changes
         uses: actions-js/push@master

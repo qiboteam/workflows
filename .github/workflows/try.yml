@@ -41,7 +41,7 @@ jobs:
       - name: Deploy documentation
         uses: ammaraskar/sphinx-action@master
         with:
-          docs-folder: "doc/"
+          docs-folder: "qibo/doc"
       
       - name: Commit & Push changes
         uses: actions-js/push@master

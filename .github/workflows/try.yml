@@ -4,18 +4,18 @@ name: CI
 on:
  
   push:
-    branches: [ "master" ]
+    branches: [ "main","better_workflow" ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
 jobs:
-  # This workflow contains a single job called "build"
+  
   build:
     
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      
       - uses: actions/checkout@v3
         with:
           clean: False
@@ -32,7 +32,7 @@ jobs:
         with:
           repository: qiboteam/qibo
 
-      - name: Download qibo  
+      - name: remove .git and .github  
         run: |
           rm -rf .git
           rm -rf .github 
@@ -43,8 +43,4 @@ jobs:
       #    pip install pytest-cov
       #    pip install .[docs]
       
-      - name: Commit & Push changes
-        uses: actions-js/push@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: master
+      

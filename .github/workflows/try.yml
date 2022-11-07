@@ -1,13 +1,10 @@
 name: CI
 
-# Controls when the workflow will run
+
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
+ 
   push:
     branches: [ "master" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -29,20 +26,22 @@ jobs:
           then
              rm -rf qibo 
           fi 
-    
+
+      - name: Clone qibo repository
+        uses: actions/checkout@v2
+        with:
+          repository: qiboteam/qibo
+
       - name: Download qibo  
         run: |
-          git clone https://github.com/qiboteam/qibo.git
-          cd qibo
           rm -rf .git
           rm -rf .github 
-          ls -a
       
-      - name: Deploy documentation
-        run: |
-          python -m pip install --upgrade pip
-          pip install pytest-cov
-          pip install .[docs]
+      #- name: Deploy documentation
+      #  run: |
+      #    python -m pip install --upgrade pip
+      #    pip install pytest-cov
+      #    pip install .[docs]
       
       - name: Commit & Push changes
         uses: actions-js/push@master

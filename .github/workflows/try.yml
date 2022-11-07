@@ -1,10 +1,17 @@
+# This is a basic workflow to help you get started with Actions
+
 name: CI
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "work2" ]
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,18 +24,15 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      #- uses: actions/checkout@master
-      #  with:
-      #    name: qiboteam/qibo 
-      #- run: git pull
-      #- run: git clone https://github.com/qiboteam/qibo.git  
-      - run: mkdir doc
-      - uses: actions/checkout@master
+
+      - name: Clone qibo repository
+        uses: actions/checkout@v2
         with:
-          name: qiboteam/qibo
-          path: doc/
-      - run: ls doc
+          repository: qiboteam/qibo
+          path: "~/"
+      #- run: git clone https://github.com/qiboteam/qibo.git
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - run: ls -a

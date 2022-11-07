@@ -27,7 +27,7 @@ jobs:
         with:
           name: qiboteam/qibo
           path: doc/
-      - run: ls
+      - run: ls doc
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:

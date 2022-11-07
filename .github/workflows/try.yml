@@ -4,7 +4,7 @@ name: CI
 on:
  
   push:
-    branches: [ "main","better_workflow" ]
+    branches: [ "main","doc" ]
 
 
 jobs:

@@ -32,7 +32,7 @@ jobs:
           path: "~/"
       - run: git clone https://github.com/qiboteam/qibo.git
       - name: Commit & Push changes
-        uses: actions-js/push@master
+        uses: actions-js/push@work2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - run: ls -a

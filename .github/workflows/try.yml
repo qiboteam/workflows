@@ -32,6 +32,9 @@ jobs:
       - run: git clone https://github.com/qiboteam/qibo.git  
       - run: git status
       - run: ls -a
+      - run: |
+          cd qibo 
+          ls -a
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:

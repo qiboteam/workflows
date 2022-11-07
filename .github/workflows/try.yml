@@ -41,6 +41,7 @@ jobs:
       - name: Deploy documentation
         run: |
           cd qibo/doc
+          pwd
           make html
       
       - name: Commit & Push changes

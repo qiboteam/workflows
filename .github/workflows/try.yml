@@ -23,12 +23,13 @@ jobs:
         with:
           clean: False
           github-server-url: https://github.com/qiboteam/qibo.git 
+          submodules: True
           
       #- uses: actions/checkout@master
       #  with:
       #    name: qiboteam/qibo 
       #- run: git pull
-      - run: git clone https://github.com/qiboteam/qibo.git  
+      #- run: git clone https://github.com/qiboteam/qibo.git  
       - run: ls -a
       - name: Commit & Push changes
         uses: actions-js/push@master

@@ -29,16 +29,16 @@ jobs:
       #  with:
       #    name: qiboteam/qibo 
       #- run: git pull
-      - run: rm -rf qibo
-      - run: git clone https://github.com/qiboteam/qibo.git  
-      - run: git status
-      - run: ls -a
-      - run: |
-          cd qibo
-          rm -rf .git
-          rm -rf .github 
-          git rm --cache client_folder 
-          ls -a
+      #- run: rm -rf qibo
+      #- run: git clone https://github.com/qiboteam/qibo.git  
+      #- run: git status
+      #- run: ls -a
+      #- run: |
+      #    cd qibo
+      #    rm -rf .git
+      #    rm -rf .github 
+      #    git rm --cache client_folder 
+      #    ls -a
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:

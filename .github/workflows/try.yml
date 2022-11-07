@@ -39,11 +39,9 @@ jobs:
           ls -a
       
       - name: Deploy documentation
-        run: |
-          pip install qibo[docs]
-          cd qibo/doc
-          pwd
-          make html
+        - uses: ammaraskar/sphinx-action@master
+          with:
+            docs-folder: "docs/"
       
       - name: Commit & Push changes
         uses: actions-js/push@master

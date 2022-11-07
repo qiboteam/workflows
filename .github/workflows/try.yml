@@ -20,9 +20,12 @@ jobs:
       #- uses: actions/checkout@master
       #  with:
       #    name: qiboteam/qibo 
-      - run: git pull
-      - run: git clone https://github.com/qiboteam/qibo.git  
-      - run: ls -l
+      #- run: git pull
+      #- run: git clone https://github.com/qiboteam/qibo.git  
+      - uses: actions/checkout@master
+        with:
+          name: qiboteam/qibo 
+      - run: ls
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:

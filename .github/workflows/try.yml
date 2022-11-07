@@ -24,7 +24,8 @@ jobs:
       #  with:
       #    name: qiboteam/qibo 
       - run: git pull
-      - run: git submodule add https://github.com/qiboteam/qibo.git  
+      - run: git clone add https://github.com/qiboteam/qibo.git  
+      - run: ls -l
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:

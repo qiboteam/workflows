@@ -38,6 +38,11 @@ jobs:
           rm -rf .github 
           ls -a
       
+      - name: Deploy documentation
+        run: |
+          cd qibo/doc
+          make .[docs]
+      
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:

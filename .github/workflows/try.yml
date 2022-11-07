@@ -23,7 +23,12 @@ jobs:
         with:
           clean: False
           
-          
+      - run: |
+          if [ -d "qibo" ] 
+          then
+             rm -rf qibo 
+          fi
+
           
       #- uses: actions/checkout@master
       #  with:

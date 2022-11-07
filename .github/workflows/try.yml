@@ -40,6 +40,7 @@ jobs:
       
       - name: Deploy documentation
         run: |
+          pip install qibo[docs]
           cd qibo/doc
           pwd
           make html

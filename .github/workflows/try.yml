@@ -19,13 +19,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           clean: False
-          
-      - name: remove qibo 
-        run: |
-          if [ -d "qibo" ] 
-          then
-             rm -rf qibo 
-          fi 
 
       - name: Clone qibo repository
         uses: actions/checkout@v2

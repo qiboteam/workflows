@@ -29,14 +29,13 @@ jobs:
       #  with:
       #    name: qiboteam/qibo 
       #- run: git pull
-      - run: git clone https://github.com/qiboteam/qibo.git  
-      - run: git status
+      #- run: git clone https://github.com/qiboteam/qibo.git  
+      #- run: git status
       - run: ls -a
-      - run: |
-          cd qibo 
+      - run: | 
           ls -a
-      - name: Commit & Push changes
-        uses: actions-js/push@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: master
+      #- name: Commit & Push changes
+      #  uses: actions-js/push@master
+      #  with:
+      #    github_token: ${{ secrets.GITHUB_TOKEN }}
+      #    branch: master

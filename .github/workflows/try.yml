@@ -24,12 +24,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: qiboteam/qibo
-
-      - name: remove .git and .github  
-        run: |
-          rm -rf .git
-          rm -rf .github 
-      
+          
       #- name: Deploy documentation
       #  run: |
       #    python -m pip install --upgrade pip

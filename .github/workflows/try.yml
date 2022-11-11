@@ -42,7 +42,6 @@ jobs:
           sudo apt install pandoc
           cd doc
           make html
-          cd build  
       # TODO: debug, remember to drop this
       - run: ls -a doc
       - name: Upload artifact

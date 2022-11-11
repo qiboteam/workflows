@@ -5,7 +5,7 @@ on:
  
   push:
     branches: [ "main","doc" ]
-    
+
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
@@ -44,6 +44,10 @@ jobs:
           make html 
       # TODO: debug, remember to drop this
       - run: ls -a doc
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./doc
       
   # Deployment job
   deploy:

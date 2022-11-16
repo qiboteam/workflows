@@ -1,4 +1,4 @@
-name: CI
+name: Deploy Sphinx documentation
 
 
 on:
@@ -25,8 +25,7 @@ jobs:
     steps:
       
       - uses: actions/checkout@v3
-        with:
-          clean: False
+        
 
       #- name: Clone qibo repository
       #  uses: actions/checkout@v2

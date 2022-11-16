@@ -12,10 +12,7 @@ on:
           required: false
           type: string 
           default: ./doc
-        Cached-package:
-          required: false
-          type: string 
-          default: pip
+       
     
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -41,7 +38,6 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ inputs.python-version }} 
-          cache: ${{ inputs.Cached-package }}
       - name: Deploy documentation
         run: |
           pip install .[docs]

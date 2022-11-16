@@ -40,7 +40,7 @@ jobs:
       - name: Deploy documentation
         run: |
           pip install .[docs]
-          sudo apt install pandoc
+          # sudo apt install pandoc
           cd doc
           make html
       - name: Upload artifact

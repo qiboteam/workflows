@@ -4,47 +4,31 @@ name: CI
 on:
  
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
 jobs:
-  # This workflow contains a single job called "build"
+  
   build:
     
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      
       - uses: actions/checkout@v3
         with:
           clean: False
-          
-      - name: remove qibo 
-        run: |
-          if [ -d "qibo" ] 
-          then
-             rm -rf qibo 
-          fi 
 
       - name: Clone qibo repository
         uses: actions/checkout@v2
         with:
           repository: qiboteam/qibo
-
-      - name: Download qibo  
-        run: |
-          rm -rf .git
-          rm -rf .github 
-      
+          
       #- name: Deploy documentation
       #  run: |
       #    python -m pip install --upgrade pip
       #    pip install pytest-cov
       #    pip install .[docs]
       
-      - name: Commit & Push changes
-        uses: actions-js/push@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: master
+      

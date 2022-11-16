@@ -8,6 +8,10 @@ on:
         python-version:
           required: true
           type: string
+        path-artifact:
+          required: false
+          type: string 
+          default: ./doc/build/html
     
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -44,7 +48,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./doc/build/html
+          path: ${{ inputs.path-artifact }}
       
   # Deployment job
   deploy:

@@ -41,6 +41,8 @@ jobs:
       - name: Deploy documentation
         run: |
           pip install .[docs]
+          # required by nbsphinx
+          # https://nbsphinx.readthedocs.io/en/0.2.15/installation.html#pandoc
           sudo apt install pandoc
           cd ${{ inputs.path-doc }}
           make html

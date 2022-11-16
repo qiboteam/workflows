@@ -28,10 +28,10 @@ jobs:
         with:
           clean: False
 
-      - name: Clone qibo repository
-        uses: actions/checkout@v2
-        with:
-          repository: qibogang/qibo
+      #- name: Clone qibo repository
+      #  uses: actions/checkout@v2
+      #  with:
+      #    repository: qibogang/qibo
 
       - name: Deploy documentation
         run: |

@@ -43,7 +43,7 @@ jobs:
         with:
           python-version: ${{ inputs.python-version }}
           cache: ${{ inputs.package-manager }}
-          cache-dependency-path: '**/setup.py'
+          cache-dependency-path: '**/setup.py' # https://github.com/actions/setup-python/issues/502
         
       - name: Install dependencies
         run: |

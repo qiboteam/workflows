@@ -14,7 +14,7 @@ jobs:
       python-version: 3.9
 ```
 
-make sure to include all the required inputs with the keyword `with`. 
+make sure to include all the required inputs after the keyword `with`. 
 
 For further information, see [the corresponding github page](https://docs.github.com/en/actions/using-workflows/reusing-workflows). 
 
@@ -32,5 +32,5 @@ It follows a list of all the implemented workflows:
     
     **Inputs:** 
 
-    * **python-version** (*string*): (Mandatory) which Python version has to be installed
+    * **python-version** (*string*): (Mandatory) the Python version to be installed 
     * **path-doc** (*string*): (Optional) documentation's path. The default value is `./doc`. 

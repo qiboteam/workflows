@@ -2,7 +2,7 @@
 
 It follows a list of all the implemented workflows:
 
-- [`publish-next-to-ghpages`](../.github/workflows/publish-next-on-ghpages.yml):
+- [`publish-next-to-ghpages`](./publish-next-to-ghpages.md):
 
     publish Next.js website to GitHub Pages, this workflow has no inputs.
 

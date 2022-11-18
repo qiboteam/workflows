@@ -2,8 +2,8 @@
 
 This workfloe publishes Next.js website to GitHub Pages, it has no inputs.
 
-Basic usage 
-===========
+Usage 
+=====
 
 ```yaml
 name: Deploy Next.js site to Pages

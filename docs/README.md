@@ -22,4 +22,4 @@ For further information, see [the corresponding github page](https://docs.github
 Documentation
 =============
 
-[Here](./documentation.md), you can find a list of all the implemented reusable workflows.
+[Here](./summary.md), you can find a list of all the implemented reusable workflows.

@@ -20,7 +20,7 @@ jobs:
     uses: qibogang/workflows/.github/workflows/deploy-sphinx-docs-to-ghpages.yml@main
     with:
       # The Python version to be installed.
-      # Mandatory input value 
+      # Mandatory input 
       python-version: 3.9
       # Documentation's path.
       # Default: ./doc 

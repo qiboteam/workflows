@@ -19,7 +19,7 @@ make sure to include all the required inputs after the keyword `with`.
 
 For further information, see [the corresponding github page](https://docs.github.com/en/actions/using-workflows/reusing-workflows). 
 
-Documentation
-=============
+Implemented workflows 
+=====================
 
-[Here](./summary.md), you can find a list of all the implemented reusable workflows.
+[Here](./summary.md), you can find a list of all the reusable workflows available in this repository.

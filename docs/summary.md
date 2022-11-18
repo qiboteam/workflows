@@ -1,4 +1,4 @@
-# Documentation 
+# Summary
 
 It follows a list of all the implemented workflows:
 

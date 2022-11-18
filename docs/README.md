@@ -17,4 +17,9 @@ jobs:
 
 make sure to include all the required inputs after the keyword `with`. 
 
-For further information, see [the corresponding github page](https://docs.github.com/en/actions/using-workflows/reusing-workflows).  
+For further information, see [the corresponding github page](https://docs.github.com/en/actions/using-workflows/reusing-workflows). 
+
+Documentation
+=============
+
+[Here](./documentation.md), you can find a list of all the implemented reusable workflows.

@@ -4,10 +4,9 @@ The repository **qibogang/workflow** is a collection of **reusable workflows** f
 
 [List of all the **reusable workflows**](./summary.md) available in this repository.
 
-How to use a reusable workflow ?
-================================
+## How to use a reusable workflow ?
 
-Suppose we want to use the **reusable workflow** `deploy-sphinx-docs-to-ghpages.yml`, all we have to do is to add the `uses` keyword in a job of our workflow, for example 
+Suppose we want to use the **reusable workflow** `deploy-sphinx-docs-to-ghpages.yml`, all we have to do is to add the `uses` keyword in a job of our workflow, for example
 
 ```yaml
 jobs:

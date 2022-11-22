@@ -6,16 +6,5 @@ Usage
 =====
 
 ```yaml
-name: Deploy Next.js site to Pages
-
-
-on: 
-  workflow_dispatch:
-  push:
-      branches: [master]
-  
-jobs:
-
-  deploy-docs:
-    uses: qibogang/workflows/.github/workflows/publish-next-to-ghpages.yml@main
+uses: qibogang/workflows/.github/workflows/publish-next-to-ghpages.yml@main
 ```

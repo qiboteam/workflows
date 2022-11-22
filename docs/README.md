@@ -1,4 +1,6 @@
-# Introduction
+# [Workflows](https://qibogang.github.io/workflows/)
+Introduction
+============
 
 The repository **qibogang/workflow** is a collection of **reusable workflows** for the Qibo Gang organization. The workflows are availaible in the folder [`github/workflows`](https://github.com/qibogang/workflows/tree/main/.github/workflows).
 

@@ -2,6 +2,8 @@
 
 The repository **qibogang/workflow** is a collection of **reusable workflows** for the Qibo Gang organization. The workflows are availaible in the folder [`github/workflows`](https://github.com/qibogang/workflows/tree/main/.github/workflows).
 
+[List of all the **reusable workflows**](./summary.md) available in this repository.
+
 How to use a reusable workflow ?
 ================================
 
@@ -13,13 +15,3 @@ jobs:
     uses: qibogang/workflows/.github/workflows/deploy-sphinx-docs-to-ghpages.yml@main
     with:
       python-version: 3.9
-```
-
-make sure to include all the required inputs after the keyword `with`. 
-
-For further information, see the corresponding [ github page](https://docs.github.com/en/actions/using-workflows/reusing-workflows). 
-
-Implemented workflows 
-=====================
-
-[Here](./summary.md), you can find a list of all the **reusable workflows** available in this repository.

@@ -53,6 +53,7 @@ jobs:
         if : ${{ inputs.package-manager == 'pip' }}
       - name: Install dependencies with poetry
         run: |
+          poetry install --no-interaction ${{ inputs.poetry-extras }}
           pip install poethepoet
           poe docs
         if: ${{ inputs.package-manager == 'poetry' }}

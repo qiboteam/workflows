@@ -50,7 +50,7 @@ jobs:
           # required by nbsphinx
           # https://nbsphinx.readthedocs.io/en/0.2.15/installation.html#pandoc
           sudo apt install pandoc
-        if : ${{ inputs.package-manager }} == "pip"
+        if : ${{ inputs.package-manager }} == pip
       - name: Install dependencies with poetry
         run: |
           pip install poethepoet

@@ -60,7 +60,8 @@ jobs:
       - name: Compile documentation
         working-directory: ${{ inputs.path-doc }}
         run: |
-          make html 
+          make html
+        if : ${{ inputs.package-manager == 'pip' }} 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:

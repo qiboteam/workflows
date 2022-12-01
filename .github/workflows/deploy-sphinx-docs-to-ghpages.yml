@@ -55,7 +55,7 @@ jobs:
         run: |
           pip install poethepoet
           poe docs
-        if: ${{ inputs.package-manager }} == "poetry"
+        if: inputs.package-manager  == "poetry"
       - name: Compile documentation
         working-directory: ${{ inputs.path-doc }}
         run: |

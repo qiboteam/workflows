@@ -49,7 +49,7 @@ jobs:
         with:
           python-version: ${{ inputs.python-version }}
           cache: ${{ inputs.package-manager }}
-          cache-dependency-path: ${{ inputs.dependency-path }} #'**/setup.py' 
+          cache-dependency-path: ${{ inputs.dependency-path }} 
       - name: Install dependencies with pip
         run: |
           ${{ inputs.package-manager }} install .[docs]
@@ -57,7 +57,7 @@ jobs:
           # https://nbsphinx.readthedocs.io/en/0.2.15/installation.html#pandoc
           sudo apt install pandoc
         if : ${{ inputs.package-manager == 'pip' }}
-      - name: Install dependencies with poetry
+      - name: Install dependencies and compile the documentation with poetry
         run: |
           poetry install --no-interaction ${{ inputs.poetry-extras }}
           pip install poethepoet

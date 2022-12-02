@@ -17,4 +17,6 @@ jobs:
     uses: qibogang/workflows/.github/workflows/deploy-sphinx-docs-to-ghpages.yml@main
     with:
       python-version: 3.9
+      package-manager: 'pip' 
+      dependency-path: '**/setup.py'
 ```

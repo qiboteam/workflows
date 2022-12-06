@@ -2,12 +2,12 @@ The repository **qibogang/workflow** is a collection of **reusable workflows**
 used by the Qibo Gang organization. The workflows are availaible in the folder
 [`github/workflows`](https://github.com/qibogang/workflows/tree/main/.github/workflows).
 
-[The list of all the **reusable workflows**](./summary.md) available in this
+[The list of all the **reusable workflows**](./summary.md) is available in this
 repository.
 
 ## How to use a reusable workflow ?
 
-Suppose you want to use the **reusable workflow**
+If you want to use the **reusable workflow**
 `deploy-sphinx-docs-to-ghpages.yml`, all you have to do is to add the `uses`
 keyword in a job of your workflow, for example
 

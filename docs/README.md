@@ -9,7 +9,7 @@ repository.
 
 Suppose you want to use the **reusable workflow**
 `deploy-sphinx-docs-to-ghpages.yml`, all you have to do is to add the `uses`
-keyword in a job of our workflow, for example
+keyword in a job of your workflow, for example
 
 ```yaml
 jobs:

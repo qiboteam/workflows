@@ -8,7 +8,7 @@ repository.
 ## How to use a reusable workflow ?
 
 Suppose you want to use the **reusable workflow**
-`deploy-sphinx-docs-to-ghpages.yml`, all we have to do is to add the `uses`
+`deploy-sphinx-docs-to-ghpages.yml`, all you have to do is to add the `uses`
 keyword in a job of our workflow, for example
 
 ```yaml

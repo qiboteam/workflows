@@ -8,12 +8,19 @@ on:
         python-version:
           required: true
           type: string
+        package-manager:
+          required: true 
+          type: string
+        dependency-path:
+          required: true 
+          type: string
         path-doc:
           required: false
           type: string 
           default: ./doc
-       
-    
+
+        
+          
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
@@ -35,19 +42,32 @@ jobs:
     steps:
       
       - uses: actions/checkout@v3
+      - name: Install poetry
+        run: pipx install poetry
+        if: ${{ inputs.package-manager == 'poetry' }}
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ inputs.python-version }}
-      - name: Install dependencies
+          cache: ${{ inputs.package-manager }}
+          cache-dependency-path: ${{ inputs.dependency-path }} 
+      - name: Install dependencies with pip
         run: |
-          pip install .[docs]
+          ${{ inputs.package-manager }} install .[docs]
           # required by nbsphinx
           # https://nbsphinx.readthedocs.io/en/0.2.15/installation.html#pandoc
           sudo apt install pandoc
+        if : ${{ inputs.package-manager == 'pip' }}
+      - name: Install dependencies and compile the documentation with poetry
+        run: |
+          poetry install --no-interaction ${{ inputs.poetry-extras }}
+          pip install poethepoet
+          poe docs
+        if: ${{ inputs.package-manager == 'poetry' }}
       - name: Compile documentation
         working-directory: ${{ inputs.path-doc }}
         run: |
-          make html 
+          make html
+        if : ${{ inputs.package-manager == 'pip' }} 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:

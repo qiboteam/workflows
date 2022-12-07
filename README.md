@@ -1,8 +1,8 @@
 # Workflows
 
-Collection of reusable workflows for the Qibo Gang organization.
+Collect reusable workflows for the Qibo Gang organization.
 
-## Currently Available
+## Docs
 
-- publish Next.js website to GitHub Pages [`publish-next-to-ghpages`](./.github/workflows/publish-next-on-ghpages.yml)
-- deploy Sphinx documentation and publish it using GitHub Pages [`deploy-sphinx-docs-to-ghpages`](./.github/workflows/deploy-sphinx-docs-to-ghpages.yml)
+You can start from the [introduction](./docs/README.md) in this repo, or
+directly have a look to the [online version](https://qibogang.github.io/workflows/).

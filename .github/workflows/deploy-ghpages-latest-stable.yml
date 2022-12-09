@@ -136,38 +136,18 @@ jobs:
     - name: Upload latest artifact
       uses: actions/upload-pages-artifact@v1
       with:
-        name: latest
-        path: new_docs/latest
-    - name: Upload stable artifact
-      uses: actions/upload-pages-artifact@v1
-      with:
-        name: stable
-        path: new_docs/stable
-
+        path: new_docs
+    
   # Deployment job
   # TODO: use the matrix of versions we want to implement 
   deploy-stable:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url}}/stable
+      url: ${{ steps.deployment.outputs.page_url}}
     runs-on: ubuntu-latest
     needs: new-artifact
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
-        with:
-          artifact_name: 'stable'
-  
-  deploy-latest:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url}}/latest
-    runs-on: ubuntu-latest
-    needs: new-artifact
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
-        with:
-          artifact_name: 'latest'
+       

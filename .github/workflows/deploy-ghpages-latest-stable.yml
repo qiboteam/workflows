@@ -120,10 +120,11 @@ jobs:
         # Otherwise it copies the existing docs
         if wget --spider "${URL}" 2>/dev/null; then 
             wget "$URL"  
+            tar -xf "${missing_doc}.tar" -C "${missing_doc}/"
         else
-            cp "${label}.tar" "${missing_doc}.tar"
+            cp -R "${label}" "${missing_doc}"
         fi   
-        tar -xf "${missing_doc}.tar" -C "${missing_doc}/"
+        
         echo "generate remaning doc" # TODO: remove this debugging line
         ls # TODO: remove this debugging line
         echo "let see in stable folder" # TODO: remove this debugging line

@@ -124,7 +124,7 @@ jobs:
             wget "$URL"  
             tar -xf "${missing_doc}.tar" -C "${missing_doc}/"
         else
-            cp -R /"${label}"/* "${missing_doc}"
+            cp "${label}"/* "${missing_doc}"
         fi   
         
         echo "generate remaning doc" # TODO: remove this debugging line

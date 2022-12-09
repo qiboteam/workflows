@@ -96,7 +96,7 @@ jobs:
         # mv artifact.tar "${label}.tar" 
         # mv "${label}.tar" new_docs/
         cd new_docs
-        #ls # TODO: remove debugging line 
+        ls # TODO: remove debugging line 
         mkdir $label
         # tar -xf "${label}.tar" -C "${label}/" 
         #ls ../new_docs # TODO: remove this debugging line
@@ -122,7 +122,7 @@ jobs:
             wget "$URL"  
             tar -xf "${missing_doc}.tar" -C "${missing_doc}/"
         else
-            cp -R "${label}" "${missing_doc}"
+            cp -R "${label}/*" "${missing_doc}"
         fi   
         
         echo "generate remaning doc" # TODO: remove this debugging line

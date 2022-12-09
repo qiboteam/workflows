@@ -131,6 +131,7 @@ jobs:
         ls # TODO: remove this debugging line
         echo "let see in stable folder" # TODO: remove this debugging line
         ls stable # TODO: remove this debugging line
+    - run: ls new_docs/stable #TODO:remove 
     # TODO: use the matrix of versions we want to implement 
     - name: Upload latest artifact
       uses: actions/upload-pages-artifact@v1

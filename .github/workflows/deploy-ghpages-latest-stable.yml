@@ -130,12 +130,12 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: latest
-        path: new_docs/latest/
+        path: new_docs/latest/build/html
     - name: Upload stable artifact
       uses: actions/upload-artifact@v1
       with:
         name: stable
-        path: new_docs/stable/
+        path: new_docs/stable/build/html
 
   # Deployment job
   deploy-stable:

@@ -126,18 +126,20 @@ jobs:
         ls # TODO: remove this debugging line
         echo "let see in stable folder" # TODO: remove this debugging line
         ls stable # TODO: remove this debugging line
+    # TODO: use the matrix of versions we want to implement 
     - name: Upload latest artifact
       uses: actions/upload-artifact@v1
       with:
         name: latest
-        path: new_docs/latest/build/html
+        path: new_docs/latest
     - name: Upload stable artifact
       uses: actions/upload-artifact@v1
       with:
         name: stable
-        path: new_docs/stable/build/html
+        path: new_docs/stable
 
   # Deployment job
+  # TODO: use the matrix of versions we want to implement 
   deploy-stable:
     environment:
       name: github-pages
@@ -150,4 +152,16 @@ jobs:
         uses: actions/deploy-pages@v1
         with:
           artifact_name: 'stable'
-    
+  
+  deploy-latest:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url}}/latest
+    runs-on: ubuntu-latest
+    needs: new-artifact
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+        with:
+          artifact_name: 'latest'

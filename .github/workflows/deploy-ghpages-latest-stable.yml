@@ -85,9 +85,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: ls # TODO: remove this debugging line 
-    - uses: actions/download-artifact@v3
-      with:
-        name: documentation  
+    
     - run: | # TODO: remove this debugging line
         ls 
         pwd 
@@ -95,13 +93,17 @@ jobs:
       run: |
         label=${{inputs.trigger-label}}
         mkdir new_docs
-        mv artifact.tar "${label}.tar" 
-        mv "${label}.tar" new_docs/
+        # mv artifact.tar "${label}.tar" 
+        # mv "${label}.tar" new_docs/
         cd new_docs
-        ls # TODO: remove debugging line 
+        #ls # TODO: remove debugging line 
         mkdir $label
-        tar -xf "${label}.tar" -C "${label}/" 
-        ls ../new_docs # TODO: remove this debugging line
+        # tar -xf "${label}.tar" -C "${label}/" 
+        #ls ../new_docs # TODO: remove this debugging line
+    - uses: actions/download-artifact@v3
+      with:
+        name: documentation
+        path: new_docs/${{inputs.trigger-label}} 
     - name: generate the remaning documentation
       run: | 
         label=${{inputs.trigger-label}} 

@@ -81,7 +81,7 @@ jobs:
   # TODO: this job should have a own reusable workflow
   new-artifact:
     needs: [build]
-    if: ${{ [ inputs.trigger-label == 'latest' ] || [ inputs.trigger-label == 'stable' ] }} 
+    if: ${{ [[ inputs.trigger-label == 'latest' ]] || [[ inputs.trigger-label == 'stable' ]] }} 
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

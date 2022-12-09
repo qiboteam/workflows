@@ -104,7 +104,8 @@ jobs:
       with:
         name: documentation
         path: new_docs/${{inputs.trigger-label}} 
-    - run: ls new_docs/${{inputs.trigger-label}} 
+    - run: ls new_docs/${{inputs.trigger-label}}  # TODO: remove this debugging line 
+    - run: ls new_docs  # TODO: remove this debugging line
     - name: generate the remaning documentation
       run: | 
         label=${{inputs.trigger-label}} 

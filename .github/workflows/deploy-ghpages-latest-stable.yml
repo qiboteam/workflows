@@ -133,7 +133,7 @@ jobs:
         name: latest
         path: new_docs/latest
     - name: Upload stable artifact
-      uses: actions/upload--pages-artifact@v1
+      uses: actions/upload-pages-artifact@v1
       with:
         name: stable
         path: new_docs/stable

@@ -83,8 +83,7 @@ jobs:
     if: ${{ ( inputs.trigger-label == 'latest' ) || ( inputs.trigger-label == 'stable' ) }} 
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: ls # TODO: remove this debugging line 
+    - uses: actions/checkout@v2 
     
     - run: | # TODO: remove this debugging line
         ls 
@@ -105,6 +104,7 @@ jobs:
       with:
         name: documentation
         path: new_docs/${{inputs.trigger-label}} 
+    - run: ls new_docs/${{inputs.trigger-label}} 
     - name: generate the remaning documentation
       run: | 
         label=${{inputs.trigger-label}} 

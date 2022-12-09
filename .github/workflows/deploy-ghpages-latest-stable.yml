@@ -72,7 +72,7 @@ jobs:
           make html
         if : ${{ inputs.package-manager == 'pip' }} 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-artifact@v1
         with:
           name: documentation
           path: ${{ inputs.path-doc }}/build/html
@@ -128,12 +128,12 @@ jobs:
         ls stable # TODO: remove this debugging line
     # TODO: use the matrix of versions we want to implement 
     - name: Upload latest artifact
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-pages-artifact@v1
       with:
         name: latest
         path: new_docs/latest
     - name: Upload stable artifact
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-pages-artifact@v1
       with:
         name: stable
         path: new_docs/stable

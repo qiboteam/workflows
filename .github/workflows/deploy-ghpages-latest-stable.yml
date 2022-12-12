@@ -42,14 +42,14 @@ jobs:
       label: ${{ steps.valid_label.outputs.value}}
     steps:
       - name: checks for the label 
-          id: valid_label
-          run: |
-            if [[ "${{ inputs.trigger-label }}" == "latest" ]] || [[ "${{ inputs.trigger-label  }}" == "stable" ]];
-              then
-                  echo "value=true" >> $GITHUB_OUTPUT
-              else
-                 echo "value=false" >> $GITHUB_OUTPUT 
-            fi
+        id: valid_label
+        run: |
+          if [[ "${{ inputs.trigger-label }}" == "latest" ]] || [[ "${{ inputs.trigger-label  }}" == "stable" ]];
+            then
+                echo "value=true" >> $GITHUB_OUTPUT
+            else
+                echo "value=false" >> $GITHUB_OUTPUT 
+          fi
             
   
   build:

@@ -122,7 +122,7 @@ jobs:
     
   # Deployment job
   # TODO: use the matrix of versions we want to implement 
-  deploy-stable:
+  deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url}}

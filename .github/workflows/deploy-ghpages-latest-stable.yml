@@ -84,28 +84,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2 
-    
-    - run: | # TODO: remove this debugging line
-        ls 
-        pwd 
     - name: generate the ${{inputs.trigger-label}} documentation 
       run: |
         label=${{inputs.trigger-label}}
         mkdir new_docs
-        # mv artifact.tar "${label}.tar" 
-        # mv "${label}.tar" new_docs/
         cd new_docs
-        ls # TODO: remove debugging line 
         mkdir $label
-        # tar -xf "${label}.tar" -C "${label}/" 
-        #ls ../new_docs # TODO: remove this debugging line
-        ls $label # TODO: remove debugging line  
     - uses: actions/download-artifact@v3
       with:
         name: documentation
         path: new_docs/${{inputs.trigger-label}} 
-    - run: ls new_docs/${{inputs.trigger-label}}  # TODO: remove this debugging line 
-    - run: ls new_docs  # TODO: remove this debugging line
     - name: generate the remaning documentation
       run: | 
         label=${{inputs.trigger-label}} 
@@ -125,13 +113,7 @@ jobs:
             tar -xf "${missing_doc}.tar" -C "${missing_doc}/"
         else
             cp -a "${label}"/. "${missing_doc}"
-        fi   
-        
-        echo "generate remaning doc" # TODO: remove this debugging line
-        ls # TODO: remove this debugging line
-        echo "let see in stable folder" # TODO: remove this debugging line
-        ls stable # TODO: remove this debugging line
-    - run: ls new_docs/stable #TODO:remove 
+        fi 
     # TODO: use the matrix of versions we want to implement 
     - name: Upload latest artifact
       uses: actions/upload-pages-artifact@v1

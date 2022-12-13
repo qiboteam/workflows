@@ -41,10 +41,7 @@ jobs:
       - name: checks for the label 
         id: valid_label
         run: |
-          if [[ "${{ inputs.trigger-label }}" == "latest" ]] || [[ "${{ inputs.trigger-label  }}" == "stable" ]];
-            then
-                exit 0
-            else
+          if [[ "${{ inputs.trigger-label }}" != "latest" ]] || [[ "${{ inputs.trigger-label  }}" != "stable" ]];
                 exit 1 
           fi
             
@@ -66,7 +63,7 @@ jobs:
           cache-dependency-path: ${{ inputs.dependency-path }} 
       - name: Install dependencies with pip
         run: |
-          ${{ inputs.package-manager }} install .[docs]
+          pip install .[docs]
           # required by nbsphinx
           # https://nbsphinx.readthedocs.io/en/0.2.15/installation.html#pandoc
           sudo apt install pandoc

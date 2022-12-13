@@ -112,7 +112,7 @@ jobs:
         URL="https://qibogang.github.io/qibo/${missing_doc}/${missing_doc}"
         mkdir "$missing_doc"
         # Check if it is possible to connect to the website 
-        if wget "${URL}" 2>/dev/null; then 
+        if wget "${URL}"; then 
             wget "$URL"  
             tar -xf "${missing_doc}.tar" -C "${missing_doc}/"
         else

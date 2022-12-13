@@ -112,11 +112,11 @@ jobs:
         URL="https://qibogang.github.io/qibo/${missing_doc}/${missing_doc}"
         mkdir "$missing_doc"
         # Check if it is possible to connect to the website 
-        # Otherwise it copies the existing docs
         if wget "${URL}" 2>/dev/null; then 
             wget "$URL"  
             tar -xf "${missing_doc}.tar" -C "${missing_doc}/"
         else
+          # Otherwise it copies the existing docs
             cp -a "${label}"/. "${missing_doc}"
         fi 
     # TODO: use the matrix of versions we want to implement 

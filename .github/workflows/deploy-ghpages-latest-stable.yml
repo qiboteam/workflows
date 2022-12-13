@@ -61,12 +61,14 @@ jobs:
           python-version: ${{ inputs.python-version }}
           cache: ${{ inputs.package-manager }}
           cache-dependency-path: ${{ inputs.dependency-path }} 
-      - name: Install dependencies with pip
+      - name: Install dependencies and compile the documentation with pip
+        working-directory: ${{ inputs.path-doc }} 
         run: |
           pip install .[docs]
           # required by nbsphinx
           # https://nbsphinx.readthedocs.io/en/0.2.15/installation.html#pandoc
           sudo apt install pandoc
+          make html
         if : ${{ inputs.package-manager == 'pip' }}
       - name: Install dependencies and compile the documentation with poetry
         run: |
@@ -74,11 +76,6 @@ jobs:
           pip install poethepoet
           poe docs
         if: ${{ inputs.package-manager == 'poetry' }}
-      - name: Compile documentation
-        working-directory: ${{ inputs.path-doc }}
-        run: |
-          make html
-        if : ${{ inputs.package-manager == 'pip' }} 
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:

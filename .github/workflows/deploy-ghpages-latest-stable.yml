@@ -37,15 +37,13 @@ concurrency:
 jobs:
   check-label:
     runs-on: ubuntu-latest
-    outputs:
-      label: ${{ steps.valid_label.outputs.value}}
     steps:
       - name: checks for the label 
         id: valid_label
         run: |
           if [[ "${{ inputs.trigger-label }}" == "latest" ]] || [[ "${{ inputs.trigger-label  }}" == "stable" ]];
             then
-                echo "value=true" >> $GITHUB_OUTPUT
+                exit 0
             else
                 exit 1 
           fi
@@ -93,7 +91,6 @@ jobs:
   # TODO: this job should have a own reusable workflow
   new-artifact:
     needs: [build, check-label]
-    if: needs.check-label.outputs.label == 'true'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2 
@@ -141,7 +138,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url}}
     runs-on: ubuntu-latest
     needs: [new-artifact, check-label]
-    if: needs.check-label.outputs.label == 'true' 
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

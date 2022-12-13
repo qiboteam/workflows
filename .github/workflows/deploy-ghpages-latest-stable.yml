@@ -122,7 +122,7 @@ jobs:
         mkdir "$missing_doc"
         # Check if it is possible to connect to the website 
         # Otherwise it copies the existing docs
-        if wget --spider "${URL}" 2>/dev/null; then 
+        if wget "${URL}" 2>/dev/null; then 
             wget "$URL"  
             tar -xf "${missing_doc}.tar" -C "${missing_doc}/"
         else

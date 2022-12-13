@@ -42,6 +42,7 @@ jobs:
         id: valid_label
         run: |
           if [[ "${{ inputs.trigger-label }}" != "latest" ]] || [[ "${{ inputs.trigger-label  }}" != "stable" ]];
+            then
                 exit 1 
           fi
             

@@ -47,7 +47,7 @@ jobs:
             then
                 echo "value=true" >> $GITHUB_OUTPUT
             else
-                echo "value=false" >> $GITHUB_OUTPUT 
+                exit 1 
           fi
             
   
@@ -55,7 +55,6 @@ jobs:
     
     runs-on: ubuntu-latest
     needs: check-label
-    if: needs.check-label.outputs.label == 'true'
     steps:
       
       - uses: actions/checkout@v3

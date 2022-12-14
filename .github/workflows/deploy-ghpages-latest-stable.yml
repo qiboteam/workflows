@@ -113,7 +113,7 @@ jobs:
         mkdir "$missing_doc"
         # Check if it is possible to connect to the website 
         if wget "${URL}"; then  
-            tar -xf "${missing_doc}.tar.gz" -C "${missing_doc}/"
+            tar -xf "${missing_doc}.tar.gz"
         else
           # Otherwise it copies the existing docs
             cp -a "${label}"/. "${missing_doc}"

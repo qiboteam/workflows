@@ -47,7 +47,7 @@ jobs:
                 exit 1 
           fi
             
-  
+  # TODO: this job should have a own reusable workflow
   build:
     
     runs-on: ubuntu-latest
@@ -84,7 +84,6 @@ jobs:
           name: documentation
           path: ${{ inputs.path-doc }}/build/html
   
-  # TODO: this job should have a own reusable workflow
   new-artifact:
     needs: [build, check-label]
     runs-on: ubuntu-latest

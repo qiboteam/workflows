@@ -109,7 +109,7 @@ jobs:
           else
             missing_doc="latest"
         fi
-        URL="https://qibogang.github.io/qibo/${missing_doc}/${missing_doc}.tar.gz"
+        URL="https://qibogang.github.io/qibo/${missing_doc}.tar.gz"
         mkdir "$missing_doc"
         # Check if it is possible to connect to the website 
         if wget "${URL}"; then  

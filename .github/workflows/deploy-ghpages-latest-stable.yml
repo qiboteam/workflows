@@ -112,7 +112,7 @@ jobs:
         URL="https://qibogang.github.io/qibo/${missing_doc}.tar.gz"
         #mkdir "$missing_doc"
         # Check if it is possible to connect to the website 
-        if wget "${URL}/error"; then  
+        if wget "${URL}"; then  
             tar -xf "${missing_doc}.tar.gz"
         else
           # Otherwise it copies the existing docs

@@ -35,8 +35,6 @@ concurrency:
 jobs:
   
   build:
-    
-    runs-on: ubuntu-latest
     uses: ./.github/workflows/build-docs.yml@build #TODO: change the branch 
     with:
       python-version: ${{ inputs.python-version }}

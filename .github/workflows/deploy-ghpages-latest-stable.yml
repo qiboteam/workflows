@@ -59,7 +59,7 @@ jobs:
     
     runs-on: ubuntu-latest
     needs: check-label
-    uses: ./.github/workflows/build-docs.yml@build #TODO: change the branch 
+    uses: ./.github/workflows/build-docs.yml 
     with:
       python-version: ${{ inputs.python-version }}
       package-manager: ${{ inputs.package-manager }}

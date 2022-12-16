@@ -13,6 +13,13 @@ on:
         dependency-path:
           required: true 
           type: string
+        docs-folder:
+          required: true 
+          type: string  
+        url:
+          required: false
+          type: string
+          default: https://qibo.science/
         trigger-label:
           required: false
           type: string
@@ -109,7 +116,7 @@ jobs:
           else
             missing_doc="latest"
         fi
-        URL="https://qibogang.github.io/qibo/${missing_doc}.tar.gz"
+        URL="${{ inputs.url }}/${{ inputs.docs-folder }}/${missing_doc}.tar.gz"
         # Check if it is possible to connect to the website 
         if wget "${URL}"; then  
             tar -xf "${missing_doc}.tar.gz"

@@ -37,42 +37,12 @@ jobs:
   build:
     
     runs-on: ubuntu-latest
+    uses: ./.github/workflows/build-docs.yml@build #TODO: change the branch 
+    with:
+      python-version: ${{ inputs.python-version }}
+      package-manager: ${{ inputs.package-manager }}
+      dependency-path: ${{ inputs.dependency-path }}
 
-    
-    steps:
-      
-      - uses: actions/checkout@v3
-      - name: Install poetry
-        run: pipx install poetry
-        if: ${{ inputs.package-manager == 'poetry' }}
-      - uses: actions/setup-python@v4
-        with:
-          python-version: ${{ inputs.python-version }}
-          cache: ${{ inputs.package-manager }}
-          cache-dependency-path: ${{ inputs.dependency-path }} 
-      - name: Install dependencies with pip
-        run: |
-          ${{ inputs.package-manager }} install .[docs]
-          # required by nbsphinx
-          # https://nbsphinx.readthedocs.io/en/0.2.15/installation.html#pandoc
-          sudo apt install pandoc
-        if : ${{ inputs.package-manager == 'pip' }}
-      - name: Install dependencies and compile the documentation with poetry
-        run: |
-          poetry install --no-interaction ${{ inputs.poetry-extras }}
-          pip install poethepoet
-          poe docs
-        if: ${{ inputs.package-manager == 'poetry' }}
-      - name: Compile documentation
-        working-directory: ${{ inputs.path-doc }}
-        run: |
-          make html
-        if : ${{ inputs.package-manager == 'pip' }} 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ${{ inputs.path-doc }}/build/html
-      
   # Deployment job
   deploy:
     environment:

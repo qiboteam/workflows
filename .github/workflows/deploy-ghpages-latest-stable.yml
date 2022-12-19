@@ -53,44 +53,18 @@ jobs:
             then
                 exit 1 
           fi
-            
-  # TODO: this job should have a own reusable workflow
+          
   build:
     
-    runs-on: ubuntu-latest
     needs: check-label
-    steps:
+    uses : ./.github/workflows/build-docs.yml
+    with:
+      python-version: ${{ inputs.python-version }}
+      package-manager: ${{ inputs.package-manager }}
+      dependency-path: ${{ inputs.dependency-path }}
+      path-doc: ${{ inputs.path-doc }} 
       
-      - uses: actions/checkout@v3
-      - name: Install poetry
-        run: pipx install poetry
-        if: ${{ inputs.package-manager == 'poetry' }}
-      - uses: actions/setup-python@v4
-        with:
-          python-version: ${{ inputs.python-version }}
-          cache: ${{ inputs.package-manager }}
-          cache-dependency-path: ${{ inputs.dependency-path }} 
-      - name: Install dependencies and compile the documentation with pip
-        run: |
-          pip install .[docs]
-          # required by nbsphinx
-          # https://nbsphinx.readthedocs.io/en/0.2.15/installation.html#pandoc
-          sudo apt install pandoc
-          cd ${{ inputs.path-doc }}
-          make html
-        if : ${{ inputs.package-manager == 'pip' }}
-      - name: Install dependencies and compile the documentation with poetry
-        run: |
-          poetry install --no-interaction ${{ inputs.poetry-extras }}
-          pip install poethepoet
-          poe docs
-        if: ${{ inputs.package-manager == 'poetry' }}
-      - name: Upload artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: documentation
-          path: ${{ inputs.path-doc }}/build/html
-  
+    
   new-artifact:
     needs: [build, check-label]
     runs-on: ubuntu-latest

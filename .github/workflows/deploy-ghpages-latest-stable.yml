@@ -53,16 +53,16 @@ jobs:
             then
                 exit 1 
           fi
-            
-  # TODO: this job should have a own reusable workflow
+          
   build:
     
     needs: check-label
-    uses: ./.github/workflows/build-docs.yml
+    uses : ./.github/workflows/build-docs.yml
     with:
       python-version: ${{ inputs.python-version }}
       package-manager: ${{ inputs.package-manager }}
       dependency-path: ${{ inputs.dependency-path }}
+      path-doc: ${{ inputs.path-doc }} 
       
     
   new-artifact:

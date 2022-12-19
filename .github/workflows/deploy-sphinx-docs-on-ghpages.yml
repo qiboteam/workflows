@@ -35,7 +35,7 @@ concurrency:
 jobs:
   
   build:
-    uses: ./.github/workflows/build-docs.yml@build #TODO: change the branch 
+    uses: ./.github/workflows/build-docs.yml #TODO: change the branch 
     with:
       python-version: ${{ inputs.python-version }}
       package-manager: ${{ inputs.package-manager }}

@@ -1,6 +1,7 @@
 # deploy-sphinx-docs-to-ghpages.yml
 
 This workflow deploys Sphinx documentation and publishes it using GitHub Pages.
+
 ## Usage
 
 ```yaml

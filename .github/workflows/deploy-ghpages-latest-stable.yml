@@ -116,7 +116,7 @@ jobs:
           else
             missing_doc="latest"
         fi
-        URL="${{ inputs.url }}/${{ inputs.docs-folder }}/${missing_doc}.tar.gz"
+        URL="${{ inputs.url }}/${{ inputs.project }}/${missing_doc}.tar.gz"
         # Check if it is possible to connect to the website 
         if wget "${URL}"; then  
             tar -xf "${missing_doc}.tar.gz"

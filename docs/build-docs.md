@@ -1,10 +1,11 @@
-# deploy-sphinx-docs-to-ghpages.yml
+# build-docs.yml
 
-This workflow deploys Sphinx documentation and publishes it using GitHub Pages.
+This workflow deploys Sphinx documentation and uploads it as an artifact.
+
 ## Usage
 
 ```yaml
-uses: qibogang/workflows/.github/workflows/deploy-sphinx-docs-to-ghpages.yml@main
+uses: qibogang/workflows/.github/workflows/build-docs.yml@main
 with:
   # The Python version to be installed.
   # Mandatory input

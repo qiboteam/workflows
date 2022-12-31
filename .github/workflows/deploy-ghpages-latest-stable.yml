@@ -49,9 +49,9 @@ jobs:
       - name: checks for the label 
         id: valid_label
         run: |
-          if [[ "${{ inputs.trigger-label }}" != "latest" ]] && [[ "${{ inputs.trigger-label  }}" != "stable" ]];
-            then
-                exit 1 
+          if [[ "${{ inputs.trigger-label }}" != "latest" ]] &&
+            [[ "${{ inputs.trigger-label }}" != "stable" ]]; then
+            exit 1 
           fi
           
   build:
@@ -73,9 +73,10 @@ jobs:
     - name: generate the ${{inputs.trigger-label}} documentation 
       run: |
         label=${{inputs.trigger-label}}
-        mkdir new_docs
+        echo $label
+        mkdir -v new_docs
         cd new_docs
-        mkdir $label
+        mkdir -v $label
     - uses: actions/download-artifact@v3
       with:
         name: documentation
@@ -84,19 +85,20 @@ jobs:
       run: | 
         label=${{inputs.trigger-label}} 
         cd new_docs
-        if [[ ${label} == "latest" ]]; 
-          then 
-            missing_doc="stable"
-          else
-            missing_doc="latest"
+        if [[ ${label} == "latest" ]]; then 
+          missing_doc="stable"
+        else
+          missing_doc="latest"
         fi
+        echo $missing_doc
         URL="${{ inputs.url }}/${{ inputs.project }}/${missing_doc}.tar.gz"
+        echo $URL
         # Check if it is possible to connect to the website 
-        if wget "${URL}"; then  
-            tar -xf "${missing_doc}.tar.gz"
+        if wget $URL; then  
+            tar -xvzf "${missing_doc}.tar.gz"
         else
           # Otherwise it copies the existing docs
-            cp -a "${label}"/. "${missing_doc}"
+            cp -va "${label}"/. "${missing_doc}"
         fi
     - name: generate the *.tar.gz 
       run: |

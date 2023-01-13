@@ -53,7 +53,7 @@ jobs:
       - name: Static HTML export with Next.js
         run: yarn next export
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1.0.7
+        uses: actions/upload-pages-artifact@v1
         with:
           path: ./out
 
@@ -67,4 +67,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1.2.3
+        uses: actions/deploy-pages@v1

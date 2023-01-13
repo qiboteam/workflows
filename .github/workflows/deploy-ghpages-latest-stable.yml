@@ -69,7 +69,7 @@ jobs:
     needs: [build, check-label]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2 
+    - uses: actions/checkout@v3 
     - name: generate the ${{inputs.trigger-label}} documentation 
       run: |
         label=${{inputs.trigger-label}}

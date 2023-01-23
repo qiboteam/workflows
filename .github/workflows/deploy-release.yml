@@ -3,7 +3,7 @@ name: Deploy Release
 on: 
 
   workflow_call:
-    inputs:
+    secrets:
       PYPI-TOKEN:
         required: true
         type: string
@@ -21,4 +21,4 @@ jobs:
     - name: Publish distribution to PyPI
       uses: pypa/gh-action-pypi-publish@master
       with:
-        password: ${{ inputs.PYPI_TOKEN }}
+        password: ${{ secrets.PYPI_TOKEN }}

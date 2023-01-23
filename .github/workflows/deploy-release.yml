@@ -6,7 +6,7 @@ on:
     secrets:
       PYPI-TOKEN:
         required: true
-        type: string
+        
 jobs:
   deploy:
     runs-on: ubuntu-latest

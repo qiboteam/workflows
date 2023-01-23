@@ -1,0 +1,22 @@
+name: Deploy Release 
+
+on: 
+
+  workflow_call:
+    secrets:
+      PYPI_TOKEN:
+        required: true
+jobs:
+  deploy:
+    steps:
+    - name: Download wheels from artifact storage
+      uses: actions/download-artifact@v4
+      with:
+        name: wheels
+        path: dist
+    - name: Setup Python
+      uses: actions/setup-python@v4
+    - name: Publish distribution to PyPI
+      uses: pypa/gh-action-pypi-publish@master
+      with:
+        password: ${{ secrets.PYPI_TOKEN }}

@@ -1,4 +1,4 @@
-name: Deploy with pip 
+name: Build wheels  
 
 on:
 

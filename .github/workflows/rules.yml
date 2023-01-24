@@ -20,6 +20,9 @@ on:
 jobs:
   build:
     runs-on: ${{ inputs.os }}
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ inputs.python-version }}

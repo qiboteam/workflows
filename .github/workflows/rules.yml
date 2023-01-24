@@ -32,30 +32,30 @@ jobs:
         pip install pytest-cov
         pip install pylint
         if [[ "${{ inputs.environment  }}" == "qibo" ]]; then
-                pip install .[tests,docs]
-                pip install git+https://github.com/qiboteam/qibojit
-                pip install tensorflow
+          pip install .[tests,docs]
+          pip install git+https://github.com/qiboteam/qibojit
+          pip install tensorflow
         fi
         if [[ "${{ inputs.environment  }}" == "qibolab" ]]; then
-                pip install git+https://github.com/qiboteam/qibo
-                pip install .[tiiq,docs]
+          pip install git+https://github.com/qiboteam/qibo
+          pip install .[tiiq,docs]
         fi
     - name: Test with pylint
       run: |
         if [[ "${{ inputs.environment  }}" == "qibo" ]]; then
-                pylint src/**/*.py -E -f colorized
-                pylint src/**/*.py --exit-zero -f colorized
+          pylint src/**/*.py -E -f colorized
+          pylint src/**/*.py --exit-zero -f colorized
         fi
         if [[ "${{ inputs.environment  }}" == "qibolab" ]]; then
-                pylint src -E -d E1123,E1120
+          pylint src -E -d E1123,E1120
         fi
       - name: Test with pytest core
         run: |
           if [[ "${{ inputs.environment  }}" == "qibo" ]]; then
-                  pytest src/qibo/tests/ --cov=qibo --cov-report=xml --pyargs qibo --durations=60
+            pytest src/qibo/tests/ --cov=qibo --cov-report=xml --pyargs qibo --durations=60
           fi
           if [[ "${{ inputs.environment  }}" == "qibolab" ]]; then
-                  pytest src/qibolab --cov=qibolab --cov-report=xml --pyargs qibolab -m "not qpu" --platforms tii1q_b1,qw5q_gold
+            pytest src/qibolab --cov=qibolab --cov-report=xml --pyargs qibolab -m "not qpu" --platforms tii1q_b1,qw5q_gold
           fi
       - name: Test example 
         if: ${{ inputs.environment == 'qibo'  }} && ${{ inputs.os == 'ubuntu' }}
@@ -63,7 +63,7 @@ jobs:
           sudo apt install pandoc
           make -C doc doctest
           if [[ "${{ inputs.python-version  }}" == "3.9" ]]; then
-                OMP_NUM_THREADS=1 pytest examples/
+            OMP_NUM_THREADS=1 pytest examples/
           fi
       - name: Upload coverage to Codecov
         if: startsWith(inputs.os, 'ubuntu')

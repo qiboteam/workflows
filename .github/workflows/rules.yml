@@ -31,15 +31,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest-cov
         pip install pylint
-        if [[ "${{ inputs.environment  }}" == "qibo" ]]; then
+        if [[ "${{ inputs.environment }}" == "qibo" ]]; then
           pip install .[tests,docs]
           pip install git+https://github.com/qiboteam/qibojit
           pip install tensorflow
         fi
-        # if [[ "${{ inputs.environment  }}" == "qibolab" ]]; then
-        #   pip install git+https://github.com/qiboteam/qibo
-        #   pip install .[tiiq,docs]
-        # fi
     - name: Test with pylint
       run: |
         if [[ "${{ inputs.environment  }}" == "qibo" ]]; then

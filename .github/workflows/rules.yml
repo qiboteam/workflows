@@ -26,16 +26,16 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ inputs.python-version }}
-    - name: Install package
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest-cov
-        pip install pylint
-        # if [[ "${{ inputs.environment }}" == "qibo" ]]; then
-        #   pip install .[tests,docs]
-        #   pip install git+https://github.com/qiboteam/qibojit
-        #   pip install tensorflow
-        # fi
+    # - name: Install package
+    #   run: |
+    #     python -m pip install --upgrade pip
+    #     pip install pytest-cov
+    #     pip install pylint
+    #     # if [[ "${{ inputs.environment }}" == "qibo" ]]; then
+    #     #   pip install .[tests,docs]
+    #     #   pip install git+https://github.com/qiboteam/qibojit
+    #     #   pip install tensorflow
+    #     # fi
     - name: Test with pylint
       run: |
         if [[ "${{ inputs.environment  }}" == "qibo" ]]; then

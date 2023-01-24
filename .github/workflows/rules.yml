@@ -36,10 +36,10 @@ jobs:
           pip install git+https://github.com/qiboteam/qibojit
           pip install tensorflow
         fi
-        if [[ "${{ inputs.environment  }}" == "qibolab" ]]; then
-          pip install git+https://github.com/qiboteam/qibo
-          pip install .[tiiq,docs]
-        fi
+        # if [[ "${{ inputs.environment  }}" == "qibolab" ]]; then
+        #   pip install git+https://github.com/qiboteam/qibo
+        #   pip install .[tiiq,docs]
+        # fi
     - name: Test with pylint
       run: |
         if [[ "${{ inputs.environment  }}" == "qibo" ]]; then

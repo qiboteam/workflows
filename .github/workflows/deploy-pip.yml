@@ -1,4 +1,4 @@
-name: Build wheels  
+name: Deploy
 
 on:
 
@@ -10,6 +10,13 @@ on:
         python-version:
           required: true 
           type: string
+        publish-PyPI:
+          required: false 
+          type: boolean
+          default: false
+    secrets:
+      PYPI-TOKEN:
+        required: false
     
 
 jobs:
@@ -31,4 +38,9 @@ jobs:
       with:
         name: wheels
         path: dist
+    - name: Publish distribution to PyPI
+      if: ${{ inputs.publish-PyPI }}
+      uses: pypa/gh-action-pypi-publish@master
+      with:
+        password: ${{ secrets.PYPI_TOKEN }}
   

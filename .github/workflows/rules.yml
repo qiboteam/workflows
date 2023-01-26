@@ -16,7 +16,7 @@ on:
         pip-flags:
           required: false 
           type: string 
-          defaul: " "
+          default: " "
         test-flag:
           required: false 
           type: boolean

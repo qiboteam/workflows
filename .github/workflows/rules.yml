@@ -42,7 +42,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pytest-cov
         pip install pylint
-        pip install .[${{inputs.pip-falgs}}]
+        pip install .${{inputs.pip-falgs}}
         if [[ "${{ inputs.environment }}" == "qibo" ]]; then
           pip install git+https://github.com/qiboteam/qibojit
           pip install tensorflow

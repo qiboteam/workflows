@@ -62,12 +62,12 @@ jobs:
         if [[ "${{ inputs.python-version  }}" == "3.9" ]]; then
           OMP_NUM_THREADS=1 pytest examples/
         fi
-    - name: Upload coverage to Codecov
-      if: startsWith(inputs.os, 'ubuntu')
-      uses: codecov/codecov-action@v2
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./coverage.xml
-        flags: unittests
-        name: codecov-umbrella
-        fail_ci_if_error: true
+    # - name: Upload coverage to Codecov
+    #   if: startsWith(inputs.os, 'ubuntu')
+    #   uses: codecov/codecov-action@v2
+    #   with:
+    #     token: ${{ secrets.CODECOV_TOKEN }}
+    #     file: ./coverage.xml
+    #     flags: unittests
+    #     name: codecov-umbrella
+    #     fail_ci_if_error: true

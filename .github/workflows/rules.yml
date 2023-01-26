@@ -32,42 +32,42 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ inputs.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ inputs.python-version }}
-      - name: Install package
-        run: |
-          python -m pip install --upgrade pip
-          pip install pytest-cov
-          pip install pylint
-          pip install pip .[${{ inputs.pip-falgs }}]
-          if [[ "${{ inputs.environment }}" == "qibo" ]]; then
-            pip install git+https://github.com/qiboteam/qibojit
-            pip install tensorflow
-          fi
-          if [[ "${{ inputs.environment }}" == "qibolab" ]]; then
-            pip install git+https://github.com/qiboteam/qibo
-          fi
-      - name: Test with pylint
-        run: pylint src
-      - name: Test with pytest core
-        run: pytest 
-      - name: Test example 
-        if: ${{ inputs.test-flag }}
-        run: |
-          sudo apt install pandoc
-          make -C doc doctest
-          if [[ "${{ inputs.python-version  }}" == "3.9" ]]; then
-            OMP_NUM_THREADS=1 pytest examples/
-          fi
-      - name: Upload coverage to Codecov
-        if: startsWith(inputs.os, 'ubuntu')
-        uses: codecov/codecov-action@v2
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: true
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ inputs.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: Install package
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest-cov
+        pip install pylint
+        pip install pip .[${{ inputs.pip-falgs }}]
+        if [[ "${{ inputs.environment }}" == "qibo" ]]; then
+          pip install git+https://github.com/qiboteam/qibojit
+          pip install tensorflow
+        fi
+        if [[ "${{ inputs.environment }}" == "qibolab" ]]; then
+          pip install git+https://github.com/qiboteam/qibo
+        fi
+    - name: Test with pylint
+      run: pylint src
+    - name: Test with pytest core
+      run: pytest 
+    - name: Test example 
+      if: ${{ inputs.test-flag }}
+      run: |
+        sudo apt install pandoc
+        make -C doc doctest
+        if [[ "${{ inputs.python-version  }}" == "3.9" ]]; then
+          OMP_NUM_THREADS=1 pytest examples/
+        fi
+    - name: Upload coverage to Codecov
+      if: startsWith(inputs.os, 'ubuntu')
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: true

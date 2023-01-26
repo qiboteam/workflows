@@ -51,7 +51,7 @@ jobs:
           pip install git+https://github.com/qiboteam/qibo
         fi
     - name: Test with pylint
-      run: pylint src
+      run: pylint src/**/*.py
     - name: Test with pytest core
       run: pytest 
     - name: Test example 

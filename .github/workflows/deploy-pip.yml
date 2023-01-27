@@ -10,7 +10,7 @@ on:
         python-version:
           required: true 
           type: string
-        publish-PyPI:
+        publish:
           required: false 
           type: boolean
           default: false
@@ -39,7 +39,7 @@ jobs:
         name: wheels
         path: dist
     - name: Publish distribution to PyPI
-      if: ${{ inputs.publish-PyPI }}
+      if: ${{ inputs.publish }}
       uses: pypa/gh-action-pypi-publish@master
       with:
         password: ${{ secrets.PYPI_TOKEN }}

@@ -13,11 +13,11 @@ on:
         environment:
           required: true 
           type: string 
-        pip-flags:
+        pip-extras:
           required: false 
           type: string 
           default: " "
-        test-flag:
+        doctests:
           required: false 
           type: boolean
           default: false 
@@ -41,7 +41,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pytest-cov
-        pip install .[${{inputs.pip-flags}}]
+        pip install .[${{inputs.pip-extras}}]
         if [[ "${{ inputs.environment }}" == "qibo" ]]; then
           pip install git+https://github.com/qiboteam/qibojit
           pip install tensorflow
@@ -61,13 +61,12 @@ jobs:
         ls #TODO: remove this line 
         pytest
     - name: Test example 
-      if: ${{ inputs.test-flag }}
+      if: ${{ inputs.doctests }}
       run: |
         sudo apt install pandoc
         make -C doc doctest
-        if [[ "${{ inputs.python-version  }}" == "3.9" ]]; then
-          OMP_NUM_THREADS=1 pytest examples/
-        fi
+        OMP_NUM_THREADS=1 pytest examples/
+      
     # - name: Upload coverage to Codecov
     #   if: startsWith(inputs.os, 'ubuntu')
     #   uses: codecov/codecov-action@v2

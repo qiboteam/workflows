@@ -52,9 +52,9 @@ jobs:
         pip install pylint
     - name: Test with pylint
       run: |
-      pwd # TODO: remove this line 
-      ls #TODO: remove this line 
-      pylint src
+        pwd # TODO: remove this line 
+        ls #TODO: remove this line 
+        pylint src
     - name: Test with pytest core
       run: pytest 
     - name: Test example 

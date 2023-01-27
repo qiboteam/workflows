@@ -52,13 +52,9 @@ jobs:
         pip install pylint
     - name: Test with pylint
       run: |
-        pwd # TODO: remove this line 
-        ls #TODO: remove this line 
         pylint src
     - name: Test with pytest core
       run: |
-        pwd # TODO: remove this line 
-        ls #TODO: remove this line 
         pytest
     - name: Test example 
       if: ${{ inputs.doctests }}
@@ -66,13 +62,12 @@ jobs:
         sudo apt install pandoc
         make -C doc doctest
         OMP_NUM_THREADS=1 pytest examples/
-      
-    # - name: Upload coverage to Codecov
-    #   if: startsWith(inputs.os, 'ubuntu')
-    #   uses: codecov/codecov-action@v2
-    #   with:
-    #     token: ${{ secrets.CODECOV_TOKEN }}
-    #     file: ./coverage.xml
-    #     flags: unittests
-    #     name: codecov-umbrella
-    #     fail_ci_if_error: true
+    - name: Upload coverage to Codecov
+      if: startsWith(inputs.os, 'ubuntu')
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: true

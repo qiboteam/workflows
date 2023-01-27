@@ -56,7 +56,10 @@ jobs:
         ls #TODO: remove this line 
         pylint src
     - name: Test with pytest core
-      run: pytest 
+      run: |
+        pwd # TODO: remove this line 
+        ls #TODO: remove this line 
+        pytest
     - name: Test example 
       if: ${{ inputs.test-flag }}
       run: |

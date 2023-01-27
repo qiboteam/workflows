@@ -51,7 +51,10 @@ jobs:
         fi
         pip install pylint
     - name: Test with pylint
-      run: pylint src
+      run: |
+      pwd # TODO: remove this line 
+      ls #TODO: remove this line 
+      pylint src
     - name: Test with pytest core
       run: pytest 
     - name: Test example 

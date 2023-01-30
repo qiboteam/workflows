@@ -63,7 +63,7 @@ jobs:
         make -C doc doctest
         OMP_NUM_THREADS=1 pytest examples/
     - name: Upload coverage to Codecov
-      if: startsWith(inputs.os, 'ubuntu')
+      if: startsWith(runner.os, 'Linux')
       uses: codecov/codecov-action@v2
       with:
         token: ${{ secrets.CODECOV_TOKEN }}

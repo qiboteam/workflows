@@ -32,9 +32,9 @@ jobs:
       run:
         shell: bash
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Python ${{ inputs.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ inputs.python-version }}
     - name: Install package
@@ -64,7 +64,7 @@ jobs:
         OMP_NUM_THREADS=1 pytest examples/
     - name: Upload coverage to Codecov
       if: startsWith(runner.os, 'Linux')
-      uses: codecov/codecov-action@v2
+      uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: ./coverage.xml

@@ -72,7 +72,7 @@ jobs:
       with:
         files: ./coverage.xml
         flags: unittests
-        name: codecov-umbrella
+        name: unit-tests
         fail_ci_if_error: true
         token: ${{ secrets.codecov_token }}
 

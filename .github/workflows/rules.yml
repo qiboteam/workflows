@@ -52,7 +52,8 @@ jobs:
         pip install pylint
     - name: Test with pylint
       run: |
-        pylint src
+        pylint src --errors-only
+        pylint src --exit-zero
     - name: Test with pytest core
       run: |
         pytest

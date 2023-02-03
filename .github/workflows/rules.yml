@@ -75,7 +75,7 @@ jobs:
         sudo apt install pandoc
         make -C doc doctest
     - name: Extra Test 
-      if:  inputs.doctests != " " || input.doctest != " "
+      if: ${{ inputs.doctests != " " || input.doctest != " " }}
       run: ${{inputs.pytest-global-var}} pytest ${{inputs.pytest-extras}}
     - name: Upload coverage to Codecov
       if: startsWith(runner.os, 'Linux')

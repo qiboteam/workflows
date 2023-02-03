@@ -76,7 +76,7 @@ jobs:
         make -C doc doctest
     - name: Extra Test 
       if: ${{ inputs.doctests != "" || input.doctest != "" }}
-        ${{inputs.pytest-global-var}} pytest ${{inputs.pytest-extras}}
+      run: ${{inputs.pytest-global-var}} pytest ${{inputs.pytest-extras}}
     - name: Upload coverage to Codecov
       if: startsWith(runner.os, 'Linux')
       uses: codecov/codecov-action@v3

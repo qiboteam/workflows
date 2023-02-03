@@ -74,7 +74,7 @@ jobs:
       run: |
         sudo apt install pandoc
         make -C doc doctest
-        ${{pytest-global-var}} pytest ${{pytest-extras}}
+        ${{inputs.pytest-global-var}} pytest ${{inputs.pytest-extras}}
     - name: Upload coverage to Codecov
       if: startsWith(runner.os, 'Linux')
       uses: codecov/codecov-action@v3

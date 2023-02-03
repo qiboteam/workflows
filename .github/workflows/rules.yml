@@ -41,7 +41,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pytest-cov
-        if [[ -z ${{ inputs.pip-extras }} ]]; then
+        if [ -z ${{ inputs.pip-extras }} ]; then
           pip install .
         else
           pip install .[${{ inputs.pip-extras }}]

@@ -21,6 +21,10 @@ on:
           required: false
           type: boolean
           default: false
+        disable-jit:
+          required: false
+          type: boolean
+          default: false
     secrets:
       CODECOV_TOKEN:
         required: true
@@ -61,6 +65,9 @@ jobs:
     - name: Test with pytest core
       run: |
         pytest
+        if [ "${{ inputs.disable-jit }}" = true ]; then
+          NUMBA_DISABLE_JIT=1 pytest
+        fi
     - name: Test example
       if: ${{ inputs.doctests }}
       run: |

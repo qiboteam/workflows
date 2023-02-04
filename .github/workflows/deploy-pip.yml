@@ -5,19 +5,19 @@ on:
   workflow_call:
     inputs:
         os:
-          required: true 
-          type: string 
+          required: true
+          type: string
         python-version:
-          required: true 
+          required: true
           type: string
         publish:
-          required: false 
+          required: false
           type: boolean
           default: false
     secrets:
       PYPI-TOKEN:
         required: false
-    
+
 
 jobs:
   build:
@@ -40,8 +40,6 @@ jobs:
         path: dist
     - name: Publish distribution to PyPI
       if: ${{ inputs.publish }}
-      uses: pypa/gh-action-pypi-publish@master
+      uses: pypa/gh-action-pypi-publish@release/v1
       with:
         password: ${{ secrets.PYPI_TOKEN }}
-  
-  

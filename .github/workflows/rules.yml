@@ -1,26 +1,26 @@
-name: Rules 
+name: Rules
 
 on:
 
   workflow_call:
     inputs:
         os:
-          required: true 
-          type: string 
+          required: true
+          type: string
         python-version:
-          required: true 
+          required: true
           type: string
         environment:
-          required: true 
-          type: string 
+          required: true
+          type: string
         pip-extras:
-          required: false 
-          type: string 
+          required: false
+          type: string
           default: " "
         doctests:
-          required: false 
+          required: false
           type: boolean
-          default: false 
+          default: false
     secrets:
       CODECOV_TOKEN:
         required: true
@@ -41,12 +41,14 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pytest-cov
-        pip install .[${{inputs.pip-extras}}]
+        pip install pytest-env
+        pip install ".[${{ inputs.pip-extras }}]"
         if [[ "${{ inputs.environment }}" == "qibo" ]]; then
           pip install git+https://github.com/qiboteam/qibojit
           pip install tensorflow
         fi
-        if [[ "${{ inputs.environment }}" == "qibolab" ]]; then
+        if [[ "${{ inputs.environment }}" == "qibolab" || \
+              "${{ inputs.environment }}" == "qibojit" ]]; then
           pip install git+https://github.com/qiboteam/qibo
         fi
         pip install pylint
@@ -57,7 +59,7 @@ jobs:
     - name: Test with pytest core
       run: |
         pytest
-    - name: Test example 
+    - name: Test example
       if: ${{ inputs.doctests }}
       run: |
         sudo apt install pandoc

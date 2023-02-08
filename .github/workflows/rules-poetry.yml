@@ -18,7 +18,7 @@ on:
         type: boolean
         default: false
     secrets:
-      CODECOV_TOKEN:
+      codecov_token:
         required: false
 
 jobs:

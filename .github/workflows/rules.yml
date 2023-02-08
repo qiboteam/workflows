@@ -21,7 +21,7 @@ on:
         type: boolean
         default: false
     secrets:
-      CODECOV_TOKEN:
+      codecov_token:
         required: false
 
 jobs:
@@ -68,7 +68,7 @@ jobs:
         if: startsWith(runner.os, 'Linux')
         uses: codecov/codecov-action@v3
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{ secrets.codecov_token }}
           file: ./coverage.xml
           flags: unittests
           name: unit-tests

@@ -12,7 +12,7 @@ on:
         required: true
         type: string
       environment:
-        description: 'Repo's name'
+        description: 'Repo name'
         required: true
         type: string
       pip-extras:
@@ -21,7 +21,7 @@ on:
         type: string
         default: " "
       doctests:
-        description: 'Enable examples' test'
+        description: 'Enable examples test'
         required: false
         type: boolean
         default: false

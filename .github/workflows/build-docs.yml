@@ -17,7 +17,7 @@ on:
           required: true 
           type: string
         path-doc:
-          description: 'Documentation's path'
+          description: 'Documentation path'
           required: false
           type: string 
           default: ./doc

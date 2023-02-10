@@ -21,7 +21,7 @@ with:
         # The python version to be installed.
         # Mandatory input
         python-version: 3.9
-        # Poetry extra flags to add 
+        # poetry extra flags to add 
         # to package's installation.
         # Default: ""
         poetry-extras: ""

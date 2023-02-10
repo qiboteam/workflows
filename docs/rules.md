@@ -29,7 +29,7 @@ with:
         # calling the reusable workflow. 
         # Mandatory input 
         environment: "qibo"
-        # Pip extra flags to add 
+        # pip extra flags to add 
         # to package's installation.
         # Default: ""
         pip-extras: " "

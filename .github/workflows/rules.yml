@@ -1,29 +1,28 @@
 name: Rules
 
 on:
-
   workflow_call:
     inputs:
-        os:
-          required: true
-          type: string
-        python-version:
-          required: true
-          type: string
-        environment:
-          required: true
-          type: string
-        pip-extras:
-          required: false
-          type: string
-          default: " "
-        doctests:
-          required: false
-          type: boolean
-          default: false
-    secrets:
-      CODECOV_TOKEN:
+      os:
         required: true
+        type: string
+      python-version:
+        required: true
+        type: string
+      environment:
+        required: true
+        type: string
+      pip-extras:
+        required: false
+        type: string
+        default: " "
+      doctests:
+        required: false
+        type: boolean
+        default: false
+    secrets:
+      codecov_token:
+        required: false
 
 jobs:
   build:
@@ -32,45 +31,45 @@ jobs:
       run:
         shell: bash
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ inputs.python-version }}
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ inputs.python-version }}
-    - name: Install package
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest-cov
-        pip install pytest-env
-        pip install ".[${{ inputs.pip-extras }}]"
-        if [[ "${{ inputs.environment }}" == "qibo" ]]; then
-          pip install git+https://github.com/qiboteam/qibojit
-          pip install tensorflow
-        fi
-        if [[ "${{ inputs.environment }}" == "qibolab" || \
-              "${{ inputs.environment }}" == "qibojit" ]]; then
-          pip install git+https://github.com/qiboteam/qibo
-        fi
-        pip install pylint
-    - name: Test with pylint
-      run: |
-        pylint src --errors-only
-        pylint src --exit-zero
-    - name: Test with pytest core
-      run: |
-        pytest
-    - name: Test example
-      if: ${{ inputs.doctests }}
-      run: |
-        sudo apt install pandoc
-        make -C doc doctest
-        OMP_NUM_THREADS=1 pytest examples/
-    - name: Upload coverage to Codecov
-      if: startsWith(runner.os, 'Linux')
-      uses: codecov/codecov-action@v3
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        file: ./coverage.xml
-        flags: unittests
-        name: unit-tests
-        fail_ci_if_error: true
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ inputs.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ inputs.python-version }}
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest-cov
+          pip install pytest-env
+          pip install ".[${{ inputs.pip-extras }}]"
+          if [[ "${{ inputs.environment }}" == "qibo" ]]; then
+            pip install git+https://github.com/qiboteam/qibojit
+            pip install tensorflow
+          fi
+          if [[ "${{ inputs.environment }}" == "qibolab" || \
+                "${{ inputs.environment }}" == "qibojit" ]]; then
+            pip install git+https://github.com/qiboteam/qibo
+          fi
+          pip install pylint
+      - name: Test with pylint
+        run: |
+          pylint src --errors-only
+          pylint src --exit-zero
+      - name: Test with pytest core
+        run: |
+          pytest
+      - name: Test example
+        if: ${{ inputs.doctests }}
+        run: |
+          sudo apt install pandoc
+          make -C doc doctest
+          OMP_NUM_THREADS=1 pytest examples/
+      - name: Upload coverage to Codecov
+        if: startsWith(runner.os, 'Linux')
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.codecov_token }}
+          file: ./coverage.xml
+          flags: unittests
+          name: unit-tests
+          fail_ci_if_error: true

@@ -5,15 +5,15 @@ on:
   workflow_call:
     inputs:
         os:
-          description: 'used operation system'
+          description: 'Used operation system'
           required: true
           type: string
         python-version:
-          description: 'used Python version'
+          description: 'Used python version'
           required: true
           type: string
         publish:
-          description: 'publish the docs'
+          description: 'Publish the docs'
           required: false
           type: boolean
           default: false

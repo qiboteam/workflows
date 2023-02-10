@@ -6,7 +6,7 @@ on:
   workflow_call:
     inputs:
         python-version:
-          description: 'Used Python version'
+          description: 'Used python version'
           required: true
           type: string
         package-manager:

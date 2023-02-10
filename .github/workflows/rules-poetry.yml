@@ -8,11 +8,11 @@ on:
         required: true
         type: string
       python-version:
-        description: 'Used Python version'
+        description: 'Used python version'
         required: true
         type: string
       poetry-extras:
-        description: 'Poetry extra flags'
+        description: 'poetry extra flags'
         required: false
         type: string
         default: ""

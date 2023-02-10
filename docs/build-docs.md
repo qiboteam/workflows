@@ -1,13 +1,13 @@
 # build-docs.yml
 
-This workflow deploys Sphinx documentation and uploads it as an artifact.
+This workflow deploys sphinx documentation and uploads it as an artifact.
 
 ## Usage
 
 ```yaml
 uses: qiboteam/workflows/.github/workflows/build-docs.yml@main
 with:
-  # The Python version to be installed.
+  # The python version to be installed.
   # Mandatory input
   python-version: 3.9
   # Choose one package manager between 'pip' and 'poetry'

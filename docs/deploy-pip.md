@@ -1,6 +1,6 @@
 # deploy-pip.yml
 
-The workflow builds the wheels and publish the repository to PyPI.
+The workflow builds the wheels and publish the repository to pypi.
 
 ## Usage 
 
@@ -12,7 +12,7 @@ with:
         # The used os. 
         # Mandatory input 
         os: 'ubuntu-latest'
-        # The Python version to be installed.
+        # The python version to be installed.
         # Mandatory input
         python-version: 3.9
         # If 'publish' is true the repository 

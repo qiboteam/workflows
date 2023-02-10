@@ -5,7 +5,7 @@ on:
   workflow_call:
     inputs:
         python-version:
-          description: 'used Python version'
+          description: 'Used Python version'
           required: true
           type: string
         package-manager:
@@ -21,12 +21,12 @@ on:
           required: true 
           type: string  
         url:
-          description: 'where to publish'
+          description: 'Where to publish'
           required: false
           type: string
           default: https://qibo.science/
         trigger-label:
-          description: 'latest or stable'
+          description: 'Latest or stable'
           required: false
           type: string
           default: none

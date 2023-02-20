@@ -1,0 +1,68 @@
+name: Deploy
+
+on:
+
+  workflow_call:
+    inputs:
+        os:
+          required: true
+          type: string
+        python-version:
+          required: true
+          type: string
+        publish:
+          required: false
+          type: boolean
+          default: false
+    secrets:
+      PYPI-TOKEN:
+        required: false
+
+
+jobs:
+  build:
+    runs-on: ${{ inputs.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ inputs.python-version }}
+      - name: Install and configure poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+      - name: Load cached venv
+        id: cached-pip-wheels
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+        if: steps.cache.outputs.cache-hit != 'true'
+      - name: Install project
+        run: poetry install --no-interaction ${{ inputs.poetry-extras }}
+      - name: Install task runner
+        run: pip install poethepoet
+      - name: Test
+        run: |
+          source $VENV
+          poe test
+      - name: Test documentation examples
+        if: ${{ inputs.doctests }}
+        run: |
+          source $VENV
+          make -C doc doctest
+      - name: Package the distribution
+        run: |
+          # package the pure python wheel
+          poetry build
+      - name: Publish distribution to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_TOKEN }}

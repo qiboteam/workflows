@@ -48,9 +48,7 @@ jobs:
         run: poetry install --no-interaction --no-root 
         if: steps.cache.outputs.cache-hit != 'true'
       - name: Install project
-        run: |
-          pip install tensorflow
-          poetry install --no-interaction ${{ inputs.poetry-extras }}
+        run: poetry install --no-interaction ${{ inputs.poetry-extras }}
       - name: Install task runner
         run: pip install poethepoet
       - name: Lint
@@ -66,6 +64,7 @@ jobs:
         if: ${{ inputs.doctests }}
         run: |
           source $VENV
+          sudo apt install pandoc
           make -C doc doctest
       - name: Upload coverage to Codecov
         if: startsWith(runner.os, 'Linux')

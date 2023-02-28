@@ -15,9 +15,9 @@ on:
           type: boolean
           default: false
         poetry-extras:
-        required: false
-        type: string
-        default: ""
+          required: false
+          type: string
+          default: ""
     secrets:
       PYPI-TOKEN:
         required: false

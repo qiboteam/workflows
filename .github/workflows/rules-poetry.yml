@@ -63,8 +63,8 @@ jobs:
       - name: Test documentation examples
         if: ${{ inputs.doctests }}
         run: |
-          source $VENV
           sudo apt install pandoc
+          source $VENV
           make -C doc doctest
       - name: Upload coverage to Codecov
         if: startsWith(runner.os, 'Linux')

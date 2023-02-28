@@ -51,6 +51,12 @@ jobs:
         run: poetry install --no-interaction ${{ inputs.poetry-extras }}
       - name: Install task runner
         run: pip install poethepoet
+      - name: Test documentation examples # TODO: move this part down 
+        if: ${{ inputs.doctests }}
+        run: |
+          sudo apt install pandoc
+          source $VENV
+          make -C doc doctest
       - name: Lint
         run: |
           source $VENV
@@ -60,12 +66,6 @@ jobs:
         run: |
           source $VENV
           poe test
-      - name: Test documentation examples
-        if: ${{ inputs.doctests }}
-        run: |
-          sudo apt install pandoc
-          source $VENV
-          make -C doc doctest
       - name: Upload coverage to Codecov
         if: startsWith(runner.os, 'Linux')
         uses: codecov/codecov-action@v2

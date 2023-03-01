@@ -18,6 +18,10 @@ on:
           required: false
           type: string
           default: ""
+        doctest:
+          required: false
+          type: boolean
+          default: false
     secrets:
       PYPI-TOKEN:
         required: false

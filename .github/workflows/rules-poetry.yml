@@ -45,7 +45,7 @@ jobs:
           path: ~/.cache
           key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
-        run: poetry install --no-interaction --no-root 
+        run: poetry install --no-interaction --no-root
         if: steps.cache.outputs.cache-hit != 'true'
       - name: Install project
         run: poetry install --no-interaction ${{ inputs.poetry-extras }}
@@ -60,7 +60,7 @@ jobs:
         run: |
           source $VENV
           poe test
-      - name: Test documentation examples # TODO: move this part down 
+      - name: Test documentation examples
         if: ${{ inputs.doctests }}
         run: |
           sudo apt install pandoc

@@ -82,7 +82,7 @@ jobs:
         name: documentation
         path: new_docs/${{inputs.trigger-label}} 
     - name: generate the remaning documentation
-      run: | 
+      run: |
         label=${{inputs.trigger-label}} 
         cd new_docs
         if [[ ${label} == "latest" ]]; then 

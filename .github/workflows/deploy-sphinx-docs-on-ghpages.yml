@@ -6,15 +6,19 @@ on:
   workflow_call:
     inputs:
         python-version:
+          description: 'Used python version'
           required: true
           type: string
         package-manager:
+          description: 'pip or poetry'
           required: true 
           type: string
         dependency-path:
+          description: 'Path to the dependency file'
           required: true 
           type: string
         path-doc:
+          description: 'Documentation path'
           required: false
           type: string 
           default: ./doc

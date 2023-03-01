@@ -4,16 +4,20 @@ on:
   workflow_call:
     inputs:
       os:
+        description: 'Used operation system'
         required: true
         type: string
       python-version:
+        description: 'Used python version'
         required: true
         type: string
       poetry-extras:
+        description: 'poetry extra flags'
         required: false
         type: string
         default: ""
       doctests:
+        description: 'Enable examples test'
         required: false
         type: boolean
         default: false

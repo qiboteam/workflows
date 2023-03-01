@@ -1,13 +1,13 @@
 # deploy-ghpages-latest-stable.yml
 
-This workflow deploys the `latest` and `stable` Sphinx documentations and publish them using GitHub Pages.
+This workflow deploys the `latest` and `stable` sphinx documentations and publish them using github pages.
 
 ## Usage
 
 ```yaml
 uses: qiboteam/workflows/.github/workflows/deploy-ghpages-latest-stable.yml@main
 with:
-  # The Python version to be installed.
+  # The python version to be installed.
   # Mandatory input
   python-version: 3.9
   # Choose one package manager between 'pip' and 'poetry'
@@ -22,7 +22,7 @@ with:
   # Url where to pubish the documentation
   # Default: https://qibo.science/
   url: https://this/is/an/example
-  # label classifing the trigger (e.g. 'latest' or 'stable')
+  # Label classifing the trigger (e.g. 'latest' or 'stable')
   # Default: none
   trigger-label: latest
   # Documentation's path.

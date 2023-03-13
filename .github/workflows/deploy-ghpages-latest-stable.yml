@@ -35,6 +35,11 @@ on:
           required: false
           type: string 
           default: ./doc
+        poetry-extras:
+          description: 'poetry extra flags'
+          required: false
+          type: string
+          default: ""
 
 
 
@@ -69,7 +74,8 @@ jobs:
       python-version: ${{ inputs.python-version }}
       package-manager: ${{ inputs.package-manager }}
       dependency-path: ${{ inputs.dependency-path }}
-      path-doc: ${{ inputs.path-doc }} 
+      path-doc: ${{ inputs.path-doc }}
+      poetry-extras: ${{ inputs.poetry-extras }}
       
     
   new-artifact:

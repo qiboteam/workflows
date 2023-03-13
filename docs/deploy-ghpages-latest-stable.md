@@ -28,4 +28,8 @@ with:
   # Documentation's path.
   # Default: ./doc
   path-doc: ./docs
+  # poetry extra flags to add 
+  # to package's installation.
+  # Default: ""
+  poetry-extras: ""
 ```

@@ -21,6 +21,11 @@ on:
           required: false
           type: string 
           default: ./doc
+        poetry-extras:
+          description: 'poetry extra flags'
+          required: false
+          type: string
+          default: ""
 jobs:
   build:
     

@@ -52,6 +52,7 @@ jobs:
         if : ${{ inputs.package-manager == 'pip' }}
       - name: Install dependencies and compile the documentation with poetry
         run: |
+          sudo apt install pandoc
           poetry install --no-interaction ${{ inputs.poetry-extras }}
           pip install poethepoet
           poe docs

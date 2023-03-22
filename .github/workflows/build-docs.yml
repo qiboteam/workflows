@@ -53,6 +53,7 @@ jobs:
       - name: Install dependencies and compile the documentation with poetry
         run: |
           sudo apt install pandoc
+          poetry config installer.modern-installation false
           poetry install --no-interaction ${{ inputs.poetry-extras }}
           pip install poethepoet
           poe docs

@@ -46,7 +46,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest-cov
           pip install pytest-env
-          pip install ".[${{ inputs.pip-extras }}]"
           if [[ "${{ inputs.environment }}" == "qibo" ]]; then
             pip install git+https://github.com/qiboteam/qibojit
             pip install tensorflow
@@ -56,6 +55,7 @@ jobs:
             pip install git+https://github.com/qiboteam/qibo
           fi
           pip install pylint
+          pip install ".[${{ inputs.pip-extras }}]"
       - name: Test with pylint
         run: |
           pylint src --errors-only

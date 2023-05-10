@@ -28,11 +28,6 @@ on:
         description: ''
         required: true
         type: string
-      simulation:
-        description: 'Enable qibojit and tensorflow tests'
-        required: false
-        type: boolean
-        default: false
       poetry-extras:
         description: 'poetry extra flags'
         required: false
@@ -96,10 +91,9 @@ jobs:
         source testenv/bin/activate
         poetry install --no-interaction ${{ inputs.poetry-extras }}
     - name: Install additional simulation dependencies
-      if: ${{ inputs.simulation }}
+      if: ${{ matrix.platform == 'sim' }}
       run: |
         pip install git+https://github.com/qiboteam/qibojit
-        pip install tensorflow
     - name: Test ${{ matrix.platform }}
       run: |
         sed -i 's/$PLATFORM/'${{ matrix.platform }}'/' ${{ inputs.slurm-job }}

@@ -1,0 +1,116 @@
+# CI workflow that runs on self hosted cluster
+name: Self-hosted rules
+
+on:
+  workflow_call:
+    inputs:
+      used-labels:
+        description: 'Label names included in the PR'
+        required: true
+        type: array
+      python-version:
+        description: 'Used python version'
+        required: true
+        type: string
+      slurm-job:
+        description: 'Name of the slurm job'
+        required: true
+        type: string
+      server-url:
+        description: ''
+        required: true
+        type: string
+      repository:
+        description: ''
+        required: true
+        type: string
+      run-id:
+        description: ''
+        required: true
+        type: string
+      simulation:
+        description: 'Enable qibojit and tensorflow tests'
+        required: false
+        type: boolean
+        default: false
+      poetry-extras:
+        description: 'poetry extra flags'
+        required: false
+        type: string
+        default: ""
+    secrets:
+      GITHUB_TOKEN:
+        required: false
+
+jobs:
+  prepare:
+    if: contains(join(inputs.used-labels), 'run-on')
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        env:
+          LABELS: ${{ toJSON(inputs.used-labels) }}
+        run: |
+          platforms="{\"platform\":["
+          combined=""
+          shopt -s lastpipe
+          jq -c '.[]' <<< "$LABELS" | while read label; do
+              platform=(${label//-/ })
+              if [ ${platform[0]} == "\"run" ] && [ ${platform[1]} == "on" ]; then
+                platforms="${platforms}${combined:+,}\"${platform[2]}"
+                combined=${platforms}
+              fi
+          done
+          platforms+="]}"
+          echo ${platforms}
+          echo matrix="${platforms}" >> $GITHUB_OUTPUT
+  build:
+    needs: prepare
+    strategy:
+      matrix: ${{fromJSON(needs.prepare.outputs.matrix)}}
+      fail-fast: false
+    runs-on: self-hosted
+    steps:
+    - name: Cleanup workspace manually
+      run: |
+        rm -rf _work/*
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: Install package
+      shell: bash -l {0}
+      run: |
+        conda create --prefix=testenv python=${{ matrix.python-version }}
+        conda activate ./testenv
+        python -m pip install --upgrade pip
+        poetry install --no-interaction ${{ inputs.poetry-extras }}
+    - name: Install additional simulation dependencies
+      if: ${inputs.simulation}
+      run: |
+        pip install git+https://github.com/qiboteam/qibojit
+        pip install tensorflow
+    - name: Test ${{ matrix.platform }}
+      run: |
+        sed -i 's/$PLATFORM/'${{ matrix.platform }}'/' ${{ inputs.slurm-job }}
+        srun -p ${{ matrix.platform }} ${{ inputs.slurm-job }}
+        mkdir coverage
+        mv coverage.xml coverage/
+        mv htmlcov coverage/
+    - uses: actions/upload-artifact@v3
+      with:
+        name: coverage-from-self-hosted
+        path: coverage/
+    - name: Notify the Pull Request
+      uses: thollander/actions-comment-pull-request@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        message: |
+          Run on QPU `${{ matrix.platform }}` completed! :atom:
+
+          > *You can download the coverage report as an artifact, from the workflow summary page:*
+          > ${{ inputs.server-url }}/${{ inputs.repository }}/actions/runs/${{ inputs.run-id }}

@@ -39,8 +39,8 @@ on:
         type: string
         default: ""
     secrets:
-      GITHUB_TOKEN:
-        required: false
+      repo_token:
+        required: true
 
 jobs:
   prepare:
@@ -107,7 +107,7 @@ jobs:
     - name: Notify the Pull Request
       uses: thollander/actions-comment-pull-request@v2
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.repo_token }}
       with:
         message: |
           Run on QPU `${{ matrix.platform }}` completed! :atom:

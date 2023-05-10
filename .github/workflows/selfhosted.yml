@@ -93,11 +93,17 @@ jobs:
     - name: Install simulation dependencies
       if: ${{ matrix.platform == 'sim' }}
       run: |
+        pip install cupy-cuda11x
+        pip install cuquantum-python-cu11
         pip install git+https://github.com/qiboteam/qibojit
     - name: Execute on ${{ matrix.platform }} queue
       run: |
         sed -i 's/$PLATFORM/'${{ matrix.platform }}'/' ${{ inputs.slurm-job }}
-        srun -p ${{ matrix.platform }} ${{ inputs.slurm-job }}
+        if [[ "${{ matrix.platform }}" == "sim" ]]; then
+          srun -p ${{ matrix.platform }} --gpus-per-node 1 ${{ inputs.slurm-job }}
+        else
+          srun -p ${{ matrix.platform }} ${{ inputs.slurm-job }}
+        fi
         mkdir coverage
         mv coverage.xml coverage/
         mv htmlcov coverage/

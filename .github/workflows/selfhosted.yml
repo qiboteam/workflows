@@ -5,9 +5,9 @@ on:
   workflow_call:
     inputs:
       used-labels:
-        description: 'Label names included in the PR'
+        description: 'Label names in JSON format'
         required: true
-        type: array
+        type: string
       python-version:
         description: 'Used python version'
         required: true
@@ -44,14 +44,13 @@ on:
 
 jobs:
   prepare:
-    if: contains(join(inputs.used-labels), 'run-on')
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - id: set-matrix
         env:
-          LABELS: ${{ toJSON(inputs.used-labels) }}
+          LABELS: ${{ inputs.used-labels }}
         run: |
           platforms="{\"platform\":["
           combined=""

@@ -88,7 +88,7 @@ jobs:
         python -m pip install --upgrade pip
         poetry install --no-interaction ${{ inputs.poetry-extras }}
     - name: Install additional simulation dependencies
-      if: ${inputs.simulation}
+      if: ${{ inputs.simulation }}
       run: |
         pip install git+https://github.com/qiboteam/qibojit
         pip install tensorflow

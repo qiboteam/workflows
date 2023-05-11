@@ -12,10 +12,6 @@ on:
         description: 'Used python version'
         required: true
         type: string
-      slurm-job:
-        description: 'Name of the slurm job'
-        required: true
-        type: string
       server-url:
         description: ''
         required: true
@@ -93,14 +89,20 @@ jobs:
     - name: Install simulation dependencies
       if: ${{ matrix.platform == 'sim' }}
       run: |
-        pip install --upgrade pip
+        python -m pip install --upgrade pip
         pip install cupy-cuda11x
         pip install cuquantum-python-cu11
         pip install git+https://github.com/qiboteam/qibojit
     - name: Execute on ${{ matrix.platform }} queue
       run: |
-        sed -i 's/$PLATFORM/'${{ matrix.platform }}'/' ${{ inputs.slurm-job }}
-        srun -p ${{ matrix.platform }} ${{ inputs.slurm-job }}
+        sed -i 's/$PLATFORM/'${{ matrix.platform }}'/' selfhosted
+        echo ${{ matrix.platform }}
+        if [[ "${{ matrix.platform }}" == "sim" ]]; then
+          echo "using GPU"
+          srun -p ${{ matrix.platform }} --gpus-per-node 1 selfhosted
+        else
+          srun -p ${{ matrix.platform }} selfhosted
+        fi
         mkdir coverage
         mv coverage.xml coverage/
         mv htmlcov coverage/

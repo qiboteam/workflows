@@ -100,12 +100,7 @@ jobs:
     - name: Execute on ${{ matrix.platform }} queue
       run: |
         sed -i 's/$PLATFORM/'${{ matrix.platform }}'/' ${{ inputs.slurm-job }}
-        if [[ "${{ matrix.platform }}" == "sim" ]]; then
-          echo "Using GPU"
-          srun -p ${{ matrix.platform }} --gpus-per-node 1 ${{ inputs.slurm-job }}
-        else
-          srun -p ${{ matrix.platform }} ${{ inputs.slurm-job }}
-        fi
+        srun -p ${{ matrix.platform }} ${{ inputs.slurm-job }}
         mkdir coverage
         mv coverage.xml coverage/
         mv htmlcov coverage/

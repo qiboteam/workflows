@@ -111,4 +111,4 @@ jobs:
           Run on QPU `${{ matrix.platform }}` completed! :atom:
 
           > *You can download the coverage report as an artifact, from the workflow summary page:*
-          > ${{ artifact-url }}
+          > ${{ inputs.artifact-url }}

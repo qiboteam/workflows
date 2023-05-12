@@ -12,16 +12,8 @@ on:
         description: 'Used python version'
         required: true
         type: string
-      server-url:
-        description: ''
-        required: true
-        type: string
-      repository:
-        description: ''
-        required: true
-        type: string
-      run-id:
-        description: ''
+      artifact-url:
+        description: 'URL to post for downloading the coverage artifact'
         required: true
         type: string
       poetry-extras:
@@ -119,4 +111,4 @@ jobs:
           Run on QPU `${{ matrix.platform }}` completed! :atom:
 
           > *You can download the coverage report as an artifact, from the workflow summary page:*
-          > ${{ inputs.server-url }}/${{ inputs.repository }}/actions/runs/${{ inputs.run-id }}
+          > ${{ artifact-url }}

@@ -16,10 +16,6 @@ on:
         description: 'URL for downloading the coverage artifact'
         required: true
         type: string
-      run-id:
-        description: 'Run ID needed to generate the link downloading the coverage artifact'
-        required: true
-        type: string
       poetry-extras:
         description: 'poetry extra flags'
         required: false

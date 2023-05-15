@@ -12,8 +12,8 @@ on:
         description: 'Used python version'
         required: true
         type: string
-      repository-url:
-        description: 'Repository URL needed to generate the link downloading the coverage artifact'
+      artifact-url:
+        description: 'URL for downloading the coverage artifact'
         required: true
         type: string
       run-id:
@@ -108,4 +108,4 @@ jobs:
           Run on QPU `${{ matrix.platform }}` completed! :atom:
 
           > *You can download the coverage report as an artifact, from the workflow summary page:*
-          > ${{ inputs.repository-url }}/actions/runs/${{ inputs.run-id }}
+          > ${{ inputs.artifact-url }}

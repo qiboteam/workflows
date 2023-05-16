@@ -81,9 +81,7 @@ jobs:
     - name: Execute on ${{ matrix.platform }} queue
       run: |
         sed -i 's/$PLATFORM/'${{ matrix.platform }}'/' selfhosted
-        echo ${{ matrix.platform }}
         if [[ "${{ matrix.platform }}" == "sim" ]]; then
-          echo "using GPU"
           srun -p ${{ matrix.platform }} --gpus-per-node 1 selfhosted
         else
           srun -p ${{ matrix.platform }} selfhosted

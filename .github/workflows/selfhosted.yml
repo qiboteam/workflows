@@ -1,0 +1,105 @@
+# CI workflow that runs on self hosted cluster
+name: Self-hosted rules
+
+on:
+  workflow_call:
+    inputs:
+      used-labels:
+        description: 'Label names in JSON format'
+        required: true
+        type: string
+      python-version:
+        description: 'Used python version'
+        required: true
+        type: string
+      artifact-url:
+        description: 'URL for downloading the coverage artifact'
+        required: true
+        type: string
+      poetry-extras:
+        description: 'poetry extra flags'
+        required: false
+        type: string
+        default: ""
+    secrets:
+      repo_token:
+        required: true
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        env:
+          LABELS: ${{ inputs.used-labels }}
+        run: |
+          platforms="{\"platform\":["
+          combined=""
+          shopt -s lastpipe
+          jq -c '.[]' <<< "$LABELS" | while read label; do
+              platform=(${label//-/ })
+              if [ ${platform[0]} == "\"run" ] && [ ${platform[1]} == "on" ]; then
+                platforms="${platforms}${combined:+,}\"${platform[2]}"
+                combined=${platforms}
+              fi
+          done
+          platforms+="]}"
+          echo ${platforms}
+          echo matrix="${platforms}" >> $GITHUB_OUTPUT
+  build:
+    needs: prepare
+    strategy:
+      matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+      fail-fast: false
+    runs-on: self-hosted
+    steps:
+    - name: Cleanup workspace manually
+      run: |
+        rm -rf _work/*
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: Install and configure poetry
+      uses: snok/install-poetry@v1
+      with:
+        virtualenvs-create: false
+    - name: Load cached venv
+      id: cached-pip-wheels
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache
+        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+    - name: Install package
+      run: |
+        python -m venv testenv
+        source testenv/bin/activate
+        poetry install --no-interaction ${{ inputs.poetry-extras }}
+    - name: Execute on ${{ matrix.platform }} queue
+      run: |
+        sed -i 's/$PLATFORM/'${{ matrix.platform }}'/' selfhosted
+        if [[ "${{ matrix.platform }}" == "sim" ]]; then
+          srun -p ${{ matrix.platform }} --gpus-per-node 1 selfhosted
+        else
+          srun -p ${{ matrix.platform }} selfhosted
+        fi
+        mkdir coverage
+        mv coverage.xml coverage/
+        mv htmlcov coverage/
+    - uses: actions/upload-artifact@v3
+      with:
+        name: coverage-from-self-hosted
+        path: coverage/
+    - name: Notify the Pull Request
+      uses: thollander/actions-comment-pull-request@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.repo_token }}
+      with:
+        message: |
+          Run on QPU `${{ matrix.platform }}` completed! :atom:
+
+          > *You can download the coverage report as an artifact, from the workflow summary page:*
+          > ${{ inputs.artifact-url }}

@@ -1,38 +1,34 @@
 name: Deploy
 
 on:
-
   workflow_call:
     inputs:
-        os:
-          required: true
-          type: string
-        python-version:
-          required: true
-          type: string
-        publish:
-          required: false
-          type: boolean
-          default: false
-        poetry-extras:
-          required: false
-          type: string
-          default: ""
-        doctest:
-          required: false
-          type: boolean
-          default: false
+      os:
+        required: true
+        type: string
+      python-version:
+        required: true
+        type: string
+      publish:
+        required: false
+        type: boolean
+        default: false
+      poetry-extras:
+        required: false
+        type: string
+        default: ""
+      doctest:
+        required: false
+        type: boolean
+        default: false
     secrets:
       PYPI-TOKEN:
         required: false
 
-
 jobs:
   build:
     runs-on: ${{ inputs.os }}
-    defaults:
-      run:
-        shell: bash
+
     steps:
       - uses: actions/checkout@v3
       - name: Setup python
@@ -42,7 +38,6 @@ jobs:
       - name: Install and configure poetry
         uses: snok/install-poetry@v1
         with:
-          virtualenvs-create: true
           virtualenvs-in-project: true
       - name: Disable modern installer
         run: poetry config installer.modern-installation false
@@ -70,7 +65,6 @@ jobs:
           make -C doc doctest
       - name: Package the distribution
         run: |
-          # package the pure python wheel
           poetry build
       - name: Publish distribution to PyPI
         if: ${{ inputs.publish }}

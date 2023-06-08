@@ -39,8 +39,6 @@ jobs:
         uses: snok/install-poetry@v1
         with:
           virtualenvs-in-project: true
-      - name: Disable modern installer
-        run: poetry config installer.modern-installation false
       - name: Load cached venv
         id: cached-pip-wheels
         uses: actions/cache@v3

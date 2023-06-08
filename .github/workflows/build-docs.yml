@@ -36,7 +36,6 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt install pandoc
-          poetry config installer.modern-installation false
           poetry install --no-interaction ${{ inputs.poetry-extras }}
           pip install poethepoet
       - name: Compile docs

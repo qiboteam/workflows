@@ -1,4 +1,4 @@
-# deploy-pip.yml
+# pypi.yml
 
 The workflow builds the wheels and publish the repository to pypi.
 
@@ -6,7 +6,7 @@ The workflow builds the wheels and publish the repository to pypi.
 
 ```yaml 
 
-uses: qiboteam/workflow/.github/workflows/deploy-pip.yml@main
+uses: qiboteam/workflow/.github/workflows/pypi.yml@main
 with:
     inputs:
         # The used os. 

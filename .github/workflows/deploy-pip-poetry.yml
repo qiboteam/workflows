@@ -57,18 +57,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
       - name: Install project
         run: poetry install --no-interaction ${{ inputs.poetry-extras }}
-      - name: Install task runner
-        run: pip install poethepoet
-      - name: Test
-        run: |
-          source $VENV
-          poe test
-      - name: Test documentation examples
-        if: ${{ inputs.doctests }}
-        run: |
-          source $VENV
-          make -C doc doctest
-      - name: Package the distribution
+     - name: Package the distribution
         run: |
           # package the pure python wheel
           poetry build

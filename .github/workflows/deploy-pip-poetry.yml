@@ -57,7 +57,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
       - name: Install project
         run: poetry install --no-interaction ${{ inputs.poetry-extras }}
-     - name: Package the distribution
+      - name: Package the distribution
         run: |
           # package the pure python wheel
           poetry build

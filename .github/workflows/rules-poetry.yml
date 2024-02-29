@@ -4,20 +4,20 @@ on:
   workflow_call:
     inputs:
       os:
-        description: 'Used operation system'
+        description: "Used operation system"
         required: true
         type: string
       python-version:
-        description: 'Used python version'
+        description: "Used python version"
         required: true
         type: string
       poetry-extras:
-        description: 'poetry extra flags'
+        description: "poetry extra flags"
         required: false
         type: string
         default: ""
       doctests:
-        description: 'Enable examples test'
+        description: "Enable examples test"
         required: false
         type: boolean
         default: false
@@ -39,15 +39,12 @@ jobs:
           python-version: ${{ inputs.python-version }}
       - name: Install and configure poetry
         uses: snok/install-poetry@v1
-        with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
       - name: Load cached venv
-        id: cached-pip-wheels
+        id: rules
         uses: actions/cache@v3
         with:
           path: ~/.cache
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+          key: ${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
       - name: Install dependencies
         run: poetry install --no-interaction --no-root
         if: steps.cache.outputs.cache-hit != 'true'

@@ -24,6 +24,11 @@ on:
     secrets:
       codecov_token:
         required: false
+      IBMQ_TOKEN:
+        required: false
+      QIBO_CLIENT_TII_TOKEN:
+        required: false
+	
 
 jobs:
   build:

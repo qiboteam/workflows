@@ -4,8 +4,8 @@ used by the qiboteam organization. The workflows are availaible in the folder
 
 # Available workflows
 
-- [`deploy-ghpages-latest-stable`](./deploy-ghpages-latest-stable.md)
 - [`docs`](./docs.md)
+- [`latest-stable`](./latest-stable.md)
 - [`test`](./test.md)
 - [`wheels`](./wheels.md)
 

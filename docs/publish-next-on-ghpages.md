@@ -1,4 +1,4 @@
-# publish-next-on-ghpages.yml
+# `publish-next-on-ghpages.yml`
 
 This workflow publishes next.js website to github pages, it has no inputs.
 

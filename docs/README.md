@@ -4,10 +4,10 @@ used by the qiboteam organization. The workflows are availaible in the folder
 
 # Available workflows
 
-- [`build-docs`](./build-docs.md)
 - [`deploy-ghpages-latest-stable`](./deploy-ghpages-latest-stable.md)
-- [`deploy-pip-poetry`](./deploy-pip-poetry.md)
-- [`rules-poetry`](./rules-poetry.md)
+- [`docs`](./docs.md)
+- [`test`](./test.md)
+- [`wheels`](./wheels.md)
 
 ## How to use a reusable workflow ?
 

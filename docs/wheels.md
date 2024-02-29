@@ -1,11 +1,11 @@
-# `deploy-pip-poetry.yml`
+# `wheels.yml`
 
 The workflow builds the wheels and publish the repository to PyPI.
 
 ## Usage
 
 ```yaml
-uses: qiboteam/workflow/.github/workflows/deploy-pip-poetry.yml@main
+uses: qiboteam/workflow/.github/workflows/wheels.yml@main
 with:
   inputs:
     # The used os.

@@ -1,4 +1,4 @@
-# `rules-poetry.yml`
+# `test.yml`
 
 The workflow runs the tests and the documentation examples of the packages managed by poetry.
 It also can evaluate the coverage and update codecov.
@@ -10,7 +10,7 @@ For public repos, the `codecov_token` is not [required](https://docs.codecov.com
 ## Usage
 
 ```yaml
-uses: qiboteam/workflow/.github/workflows/rules-poetry.yml@main
+uses: qiboteam/workflow/.github/workflows/test.yml@main
 with:
   inputs:
     # The used os.

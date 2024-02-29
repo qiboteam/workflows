@@ -34,12 +34,12 @@ jobs:
       run:
         shell: bash
     steps:
-      # - name: echo
-      #   env:
-      #     IBMQ_TOKEN: ${{ secrets.IBMQ_TOKEN }}
-      #   run: |
-      #     echo "-----------------------> Checking whether the global variable is correctly set"
-      #     echo $IBMQ_TOKEN
+      - name: print
+        env:
+          IBMQ_TOKEN: ${{ secrets.IBMQ_TOKEN }}
+        run: |
+          echo "-----------------------> Checking whether the global variable is correctly set"
+          echo $IBMQ_TOKEN
       - uses: actions/checkout@v3
       - name: Setup python
         uses: actions/setup-python@v4

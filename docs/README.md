@@ -6,7 +6,6 @@ used by the qiboteam organization. The workflows are availaible in the folder
 
 - [`build-docs`](./build-docs.md)
 - [`deploy-ghpages-latest-stable`](./deploy-ghpages-latest-stable.md)
-- [`publish-next-on-ghpages`](./publish-next-on-ghpages.md)
 - [`rules-poetry`](./rules-poetry.md)
 
 ## How to use a reusable workflow ?

@@ -24,6 +24,8 @@ on:
     secrets:
       codecov_token:
         required: false
+      IBMQ_TOKEN:
+        required: false
 
 jobs:
   build:
@@ -33,6 +35,8 @@ jobs:
         shell: bash
     steps:
       - name: echo
+        env:
+          IBMQ_TOKEN: ${{ secrets.IBMQ_TOKEN }}
         run: |
           echo "-----------------------> Checking whether the global variable is correctly set"
           echo $IBMQ_TOKEN

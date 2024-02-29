@@ -22,8 +22,6 @@ on:
         type: boolean
         default: false
     secrets:
-      codecov_token:
-        required: false
       IBMQ_TOKEN:
         required: false
 	

@@ -1,37 +1,34 @@
 name: Build the documentation
 
 on:
-
   workflow_call:
     inputs:
-        python-version:
-          description: 'Used python version'
-          required: true
-          type: string
-        package-manager:
-          description: 'pip or poetry'
-          required: true 
-          type: string
-        dependency-path:
-          description: 'Path to the dependency file'
-          required: true 
-          type: string
-        path-doc:
-          description: 'Documentation path'
-          required: false
-          type: string 
-          default: ./doc
-        poetry-extras:
-          description: 'poetry extra flags'
-          required: false
-          type: string
-          default: ""
+      python-version:
+        description: "Used python version"
+        required: true
+        type: string
+      package-manager:
+        description: "pip or poetry"
+        required: true
+        type: string
+      dependency-path:
+        description: "Path to the dependency file"
+        required: true
+        type: string
+      path-doc:
+        description: "Documentation path"
+        required: false
+        type: string
+        default: ./doc
+      poetry-extras:
+        description: "poetry extra flags"
+        required: false
+        type: string
+        default: ""
 jobs:
   build:
-    
     runs-on: ubuntu-latest
     steps:
-      
       - uses: actions/checkout@v3
       - name: Install poetry
         run: pipx install poetry
@@ -40,7 +37,7 @@ jobs:
         with:
           python-version: ${{ inputs.python-version }}
           cache: ${{ inputs.package-manager }}
-          cache-dependency-path: ${{ inputs.dependency-path }} 
+          cache-dependency-path: ${{ inputs.dependency-path }}
       - name: Install dependencies and compile the documentation with pip
         run: |
           pip install .[docs]
@@ -49,11 +46,10 @@ jobs:
           sudo apt install pandoc
           cd ${{ inputs.path-doc }}
           make html
-        if : ${{ inputs.package-manager == 'pip' }}
+        if: ${{ inputs.package-manager == 'pip' }}
       - name: Install dependencies and compile the documentation with poetry
         run: |
           sudo apt install pandoc
-          poetry config installer.modern-installation false
           poetry install --no-interaction ${{ inputs.poetry-extras }}
           pip install poethepoet
           poe docs
@@ -63,4 +59,3 @@ jobs:
         with:
           name: documentation
           path: ${{ inputs.path-doc }}/build/html
-  

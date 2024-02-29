@@ -28,7 +28,6 @@ on:
         required: false
 
 jobs:
-
   build:
     runs-on: ${{ inputs.os }}
     defaults:

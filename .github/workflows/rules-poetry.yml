@@ -24,9 +24,6 @@ on:
     secrets:
       codecov_token:
         required: false
-      IBMQ_TOKEN:
-        required: false
-
 jobs:
   build:
     runs-on: ${{ inputs.os }}

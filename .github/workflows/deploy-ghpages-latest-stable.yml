@@ -56,7 +56,7 @@ jobs:
 
   build:
     needs: check-label
-    uses: ./.github/workflows/build-docs.yml
+    uses: ./.github/workflows/docs.yml
     with:
       python-version: ${{ inputs.python-version }}
       dependency-path: ${{ inputs.dependency-path }}

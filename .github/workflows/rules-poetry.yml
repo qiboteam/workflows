@@ -38,7 +38,6 @@ jobs:
      - name: echo
        run: |
          echo "-----------------------> Checking whether the global variable is correctly set"
-         echo $IBMQ_TOKEN
 
   build:
     runs-on: ${{ inputs.os }}

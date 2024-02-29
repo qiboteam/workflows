@@ -30,7 +30,10 @@ on:
 jobs:
 
   print:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.os }}
+    defaults:
+      run:
+        shell: bash
     steps:
      - name: echo
        run: |

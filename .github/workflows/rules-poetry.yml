@@ -29,16 +29,6 @@ on:
 
 jobs:
 
-  print:
-    runs-on: ${{ inputs.os }}
-    defaults:
-      run:
-        shell: bash
-    steps:
-     - name: echo
-       run: |
-         echo "-----------------------> Checking whether the global variable is correctly set"
-
   build:
     runs-on: ${{ inputs.os }}
     defaults:

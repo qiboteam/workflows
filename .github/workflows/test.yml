@@ -1,4 +1,4 @@
-name: Rules
+name: Test
 
 on:
   workflow_call:
@@ -26,22 +26,22 @@ on:
         required: false
 
 jobs:
-  build:
+  test:
     runs-on: ${{ inputs.os }}
     defaults:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ inputs.python-version }}
       - name: Install and configure poetry
         uses: snok/install-poetry@v1
       - name: Load cached venv
-        id: rules
-        uses: actions/cache@v3
+        id: test
+        uses: actions/cache@v4
         with:
           path: ~/.cache
           key: ${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
@@ -52,11 +52,6 @@ jobs:
         run: poetry install --no-interaction ${{ inputs.poetry-extras }}
       - name: Install task runner
         run: pip install poethepoet
-      - name: Lint
-        run: |
-          source $VENV
-          poe lint
-          poe lint-warnings
       - name: Test
         run: |
           source $VENV

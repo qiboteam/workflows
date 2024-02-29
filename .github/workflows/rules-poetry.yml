@@ -24,7 +24,6 @@ on:
     secrets:
       codecov_token:
         required: false
-	
 
 jobs:
   build:

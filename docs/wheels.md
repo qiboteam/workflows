@@ -5,7 +5,7 @@ The workflow builds the wheels and publish the repository to PyPI.
 ## Usage
 
 ```yaml
-uses: qiboteam/workflow/.github/workflows/wheels.yml@main
+uses: qiboteam/workflow/.github/workflows/wheels.yml@v2
 with:
   inputs:
     # The used os.

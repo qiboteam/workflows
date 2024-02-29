@@ -5,7 +5,7 @@ This workflow deploys the `latest` and `stable` sphinx documentations and publis
 ## Usage
 
 ```yaml
-uses: qiboteam/workflows/.github/workflows/deploy-ghpages-latest-stable.yml@main
+uses: qiboteam/workflows/.github/workflows/deploy-ghpages-latest-stable.yml@v2
 with:
   # The python version to be installed.
   # Mandatory input

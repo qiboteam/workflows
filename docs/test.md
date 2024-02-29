@@ -10,7 +10,7 @@ For public repos, the `codecov_token` is not [required](https://docs.codecov.com
 ## Usage
 
 ```yaml
-uses: qiboteam/workflow/.github/workflows/test.yml@main
+uses: qiboteam/workflow/.github/workflows/test.yml@v2
 with:
   inputs:
     # The used os.

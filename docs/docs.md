@@ -5,7 +5,7 @@ This workflow deploys sphinx documentation and uploads it as an artifact.
 ## Usage
 
 ```yaml
-uses: qiboteam/workflows/.github/workflows/docs.yml@main
+uses: qiboteam/workflows/.github/workflows/docs.yml@v2
 with:
   # The python version to be installed.
   # Mandatory input

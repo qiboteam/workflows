@@ -2,8 +2,11 @@ The repository **qiboteam/workflow** is a collection of **reusable workflows**
 used by the qiboteam organization. The workflows are availaible in the folder
 [`github/workflows`](https://github.com/qiboteam/workflows/tree/main/.github/workflows).
 
-[The list of all the **reusable workflows**](./summary.md) is available in this
-repository.
+# Available workflows
+
+- [`build-docs`](./build-docs.md)
+- [`deploy-ghpages-latest-stable`](./deploy-ghpages-latest-stable.md)
+- [`rules-poetry`](./rules-poetry.md)
 
 ## How to use a reusable workflow ?
 
@@ -17,6 +20,6 @@ jobs:
     uses: qiboteam/workflows/.github/workflows/deploy-sphinx-docs-to-ghpages.yml@main
     with:
       python-version: 3.9
-      package-manager: 'pip'
-      dependency-path: '**/setup.py'
+      package-manager: "pip"
+      dependency-path: "**/setup.py"
 ```

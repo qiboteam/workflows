@@ -1,4 +1,4 @@
-# build-docs.yml
+# `build-docs.yml`
 
 This workflow deploys sphinx documentation and uploads it as an artifact.
 
@@ -12,14 +12,14 @@ with:
   python-version: 3.9
   # Choose one package manager between 'pip' and 'poetry'
   # Mandatory input
-  package-manager: 'pip'
+  package-manager: "pip"
   # Specify the path to the dependency file
   # Mandatory input
-  dependency-path: '**/setup.py'
+  dependency-path: "**/setup.py"
   # Documentation's path.
   # Default: ./doc
   path-doc: ./docs
-  # poetry extra flags to add 
+  # poetry extra flags to add
   # to package's installation.
   # Default: ""
   poetry-extras: ""

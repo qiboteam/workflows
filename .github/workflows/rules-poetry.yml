@@ -22,7 +22,7 @@ on:
         type: boolean
         default: false
     secrets:
-      IBMQ_TOKEN:
+      codecov_token:
         required: false
 	
 
@@ -33,10 +33,10 @@ jobs:
       run:
         shell: bash
     steps:
-      - name: Setting enviroment variable
-        env:
-	  IBMQ_TOKEN: ${{ secrets.IBMQ_TOKEN }}
-  	  QIBO_CLIENT_TII_TOKEN: ${{ secrets.QIBO_CLIENT_TII_TOKEN }}
+      - name: echo
+        run: |
+          echo "-----------------------> Checking whether the global variable is correctly set"
+          echo $IBMQ_TOKEN
       - uses: actions/checkout@v3
       - name: Setup python
         uses: actions/setup-python@v4

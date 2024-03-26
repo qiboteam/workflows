@@ -32,26 +32,19 @@ jobs:
       run:
         shell: bash
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - name: Install poetry
+        run: |
+          pipx install poetry
+          # and the task runner
+          pipx inject poetry poethepoet --include-apps
       - name: Setup python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ inputs.python-version }}
-      - name: Install and configure poetry
-        uses: snok/install-poetry@v1
-      - name: Load cached venv
-        id: rules
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache
-          key: ${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-      - name: Install dependencies
-        run: poetry install --no-interaction --no-root
-        if: steps.cache.outputs.cache-hit != 'true'
+          cache: "poetry"
       - name: Install project
-        run: poetry install --no-interaction ${{ inputs.poetry-extras }}
-      - name: Install task runner
-        run: pip install poethepoet
+        run: poetry install ${{ inputs.poetry-extras }}
       - name: Lint
         run: |
           source $VENV
@@ -69,7 +62,7 @@ jobs:
           make -C doc doctest
       - name: Upload coverage to Codecov
         if: startsWith(runner.os, 'Linux')
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           files: ./coverage.xml
           flags: unittests

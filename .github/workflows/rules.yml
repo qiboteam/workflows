@@ -71,7 +71,7 @@ jobs:
           OMP_NUM_THREADS=1 pytest examples/
       - name: Upload coverage to Codecov
         if: startsWith(runner.os, 'Linux')
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v4.3.0
         with:
           token: ${{ secrets.codecov_token }}
           file: ./coverage.xml

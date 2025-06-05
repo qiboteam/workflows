@@ -28,7 +28,9 @@ runs:
       run: |
         sudo apt install pandoc
         eval $(poetry env activate)
-        make -C doc doctest
+        poe test-docs || make -C doc doctest  # TODO: both commands are kept, to
+                                              # preserve backwards compatibility,
+                                              # remove in next breaking change
     - name: Upload coverage to Codecov
       if: startsWith(runner.os, 'Linux')
       uses: codecov/codecov-action@v4

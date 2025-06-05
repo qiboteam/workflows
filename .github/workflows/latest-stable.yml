@@ -26,6 +26,11 @@ on:
         required: false
         type: string
         default: ""
+      output-path:
+        description: "docs output location"
+        required: false
+        type: string
+        default: "doc/build/html"
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -56,6 +61,7 @@ jobs:
     with:
       python-version: ${{ inputs.python-version }}
       poetry-extras: ${{ inputs.poetry-extras }}
+      output-path: ${{ inputs.output-path }}
 
   new-artifact:
     needs: [build, check-label]

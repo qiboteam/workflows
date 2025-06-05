@@ -12,6 +12,11 @@ on:
         required: false
         type: string
         default: ""
+      output-path:
+        description: "docs output location"
+        required: true
+        type: string
+
 jobs:
   docs:
     runs-on: ubuntu-latest
@@ -30,4 +35,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: documentation
-          path: doc/build/html
+          path: ${{ inputs.output-path }}

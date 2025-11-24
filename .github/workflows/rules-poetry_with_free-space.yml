@@ -1,0 +1,85 @@
+name: Rules
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        description: "Used operation system"
+        required: true
+        type: string
+      python-version:
+        description: "Used python version"
+        required: true
+        type: string
+      poetry-extras:
+        description: "poetry extra flags"
+        required: false
+        type: string
+        default: ""
+      doctests:
+        description: "Enable examples test"
+        required: false
+        type: boolean
+        default: false
+    secrets:
+      codecov_token:
+        required: false
+
+jobs:
+  build:
+    runs-on: ${{ inputs.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Free Disk Space (Ubuntu)
+        if: ${{ inputs.os == 'ubuntu-latest' }}
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+      - uses: actions/checkout@v4
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python-version }}
+      - name: Install and configure poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+      - name: Install project
+        run: poetry install --no-interaction ${{ inputs.poetry-extras }}
+      - name: Install task runner
+        run: pip install poethepoet
+      - name: Lint
+        run: |
+          source $VENV
+          poe lint
+          poe lint-warnings
+      - name: Test
+        run: |
+          source $VENV
+          poe test
+      - name: Test documentation examples
+        if: ${{ inputs.doctests }}
+        run: |
+          sudo apt install pandoc
+          source $VENV
+          make -C doc doctest
+      - name: Upload coverage to Codecov
+        if: startsWith(runner.os, 'Linux')
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage.xml
+          flags: unittests
+          name: unit-tests
+          fail_ci_if_error: true
+          token: ${{ secrets.codecov_token }}

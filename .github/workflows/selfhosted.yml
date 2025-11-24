@@ -5,19 +5,19 @@ on:
   workflow_call:
     inputs:
       used-labels:
-        description: 'Label names in JSON format'
+        description: "Label names in JSON format"
         required: true
         type: string
       python-version:
-        description: 'Used python version'
+        description: "Used python version"
         required: true
         type: string
       artifact-url:
-        description: 'URL for downloading the coverage artifact'
+        description: "URL for downloading the coverage artifact"
         required: true
         type: string
       poetry-extras:
-        description: 'poetry extra flags'
+        description: "poetry extra flags"
         required: false
         type: string
         default: ""
@@ -55,51 +55,45 @@ jobs:
       fail-fast: false
     runs-on: self-hosted
     steps:
-    - name: Cleanup workspace manually
-      run: |
-        rm -rf _work/*
-    - uses: actions/checkout@v4
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ inputs.python-version }}
-    - name: Install and configure poetry
-      uses: snok/install-poetry@v1
-      with:
-        virtualenvs-create: false
-    - name: Load cached venv
-      id: cached-pip-wheels
-      uses: actions/cache@v4
-      with:
-        path: ~/.cache
-        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-    - name: Install package
-      run: |
-        python -m venv testenv
-        source testenv/bin/activate
-        poetry install --no-interaction ${{ inputs.poetry-extras }}
-    - name: Execute on ${{ matrix.platform }} queue
-      run: |
-        sed -i 's/$PLATFORM/'${{ matrix.platform }}'/' selfhosted
-        if [[ "${{ matrix.platform }}" == "sim" ]]; then
-          srun -p ${{ matrix.platform }} --gpus-per-node 1 selfhosted
-        else
-          srun -p ${{ matrix.platform }} selfhosted
-        fi
-        mkdir coverage
-        mv coverage.xml coverage/
-        mv htmlcov coverage/
-    - uses: actions/upload-artifact@v3
-      with:
-        name: coverage-from-self-hosted
-        path: coverage/
-    - name: Notify the Pull Request
-      uses: thollander/actions-comment-pull-request@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.repo_token }}
-      with:
-        message: |
-          Run on QPU `${{ matrix.platform }}` completed! :atom:
+      - name: Cleanup workspace manually
+        run: |
+          rm -rf _work/*
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python-version }}
+      - name: Install and configure poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: false
+      - name: Install package
+        run: |
+          python -m venv testenv
+          source testenv/bin/activate
+          poetry install --no-interaction ${{ inputs.poetry-extras }}
+      - name: Execute on ${{ matrix.platform }} queue
+        run: |
+          sed -i 's/$PLATFORM/'${{ matrix.platform }}'/' selfhosted
+          if [[ "${{ matrix.platform }}" == "sim" ]]; then
+            srun -p ${{ matrix.platform }} --gpus-per-node 1 selfhosted
+          else
+            srun -p ${{ matrix.platform }} selfhosted
+          fi
+          mkdir coverage
+          mv coverage.xml coverage/
+          mv htmlcov coverage/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage-from-self-hosted
+          path: coverage/
+      - name: Notify the Pull Request
+        uses: thollander/actions-comment-pull-request@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.repo_token }}
+        with:
+          message: |
+            Run on QPU `${{ matrix.platform }}` completed! :atom:
 
-          > *You can download the coverage report as an artifact, from the workflow summary page:*
-          > ${{ inputs.artifact-url }}
+            > *You can download the coverage report as an artifact, from the workflow summary page:*
+            > ${{ inputs.artifact-url }}

@@ -90,7 +90,7 @@ jobs:
         mkdir -v new_docs
         cd new_docs
         mkdir -v $label
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: documentation
         path: new_docs/${{inputs.trigger-label}} 
@@ -120,7 +120,7 @@ jobs:
         tar -czvf stable.tar.gz ./stable 
     # TODO: use the matrix of versions we want to implement 
     - name: Upload latest artifact
-      uses: actions/upload-pages-artifact@v1
+      uses: actions/upload-pages-artifact@v3
       with:
         path: new_docs
     
@@ -135,5 +135,5 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
        

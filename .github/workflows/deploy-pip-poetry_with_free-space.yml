@@ -34,7 +34,8 @@ jobs:
       run:
         shell: bash
     steps:
-      - name: Free Disk Space
+      - name: Free Disk Space (Ubuntu)
+        if: ${{ inputs.os == 'ubuntu-latest' }}
         uses: jlumbroso/free-disk-space@v1.3.1
         with:
           tool-cache: false

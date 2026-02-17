@@ -22,7 +22,7 @@ on:
         type: boolean
         default: false
     secrets:
-      PYPI-TOKEN:
+      PYPI_TOKEN:
         required: false
 
 jobs:

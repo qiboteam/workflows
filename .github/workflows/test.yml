@@ -34,7 +34,7 @@ jobs:
     runs-on: ${{ inputs.os }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: qiboteam/workflows/actions/poetry/setup@v2
         with:
           python-version: ${{ inputs.python-version }}
@@ -46,7 +46,7 @@ jobs:
     runs-on: ${{ inputs.os }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: qiboteam/workflows/actions/poetry/setup@v2
         with:
           python-version: ${{ inputs.python-version }}

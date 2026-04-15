@@ -33,7 +33,7 @@ runs:
                                               # remove in next breaking change
     - name: Upload coverage to Codecov
       if: startsWith(runner.os, 'Linux')
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v6
       with:
         files: ./coverage.xml
         flags: unittests

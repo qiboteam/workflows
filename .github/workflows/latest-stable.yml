@@ -21,8 +21,8 @@ on:
         required: false
         type: string
         default: none
-      poetry-extras:
-        description: "poetry extra flags"
+      uv-extras:
+        description: "uv sync extra flags"
         required: false
         type: string
         default: ""
@@ -60,7 +60,7 @@ jobs:
     uses: ./.github/workflows/docs.yml
     with:
       python-version: ${{ inputs.python-version }}
-      poetry-extras: ${{ inputs.poetry-extras }}
+      uv-extras: ${{ inputs.uv-extras }}
       output-path: ${{ inputs.output-path }}
 
   new-artifact:

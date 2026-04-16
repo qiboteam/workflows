@@ -11,8 +11,8 @@ on:
         description: "Used python version"
         required: true
         type: string
-      poetry-extras:
-        description: "poetry extra flags"
+      uv-extras:
+        description: "uv sync extra flags"
         required: false
         type: string
         default: ""
@@ -35,24 +35,24 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - uses: qiboteam/workflows/actions/poetry/setup@v2
+      - uses: qiboteam/workflows/actions/uv/setup@uv
         with:
           python-version: ${{ inputs.python-version }}
       - name: Install project
-        run: poetry install ${{ inputs.poetry-extras }}
-      - uses: qiboteam/workflows/actions/poetry/analyze@v2
+        run: uv sync ${{ inputs.uv-extras }}
+      - uses: qiboteam/workflows/actions/uv/analyze@uv
 
   test:
     runs-on: ${{ inputs.os }}
 
     steps:
       - uses: actions/checkout@v6
-      - uses: qiboteam/workflows/actions/poetry/setup@v2
+      - uses: qiboteam/workflows/actions/uv/setup@uv
         with:
           python-version: ${{ inputs.python-version }}
       - name: Install project
-        run: poetry install ${{ inputs.poetry-extras }}
-      - uses: qiboteam/workflows/actions/poetry/test@v2
+        run: uv sync ${{ inputs.uv-extras }}
+      - uses: qiboteam/workflows/actions/uv/test@uv
         with:
           doctests: ${{ toJSON(inputs.doctests) }}
           codecov_token: ${{ secrets.codecov_token }}

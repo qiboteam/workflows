@@ -5,7 +5,7 @@ The workflow builds the wheels and publish the repository to PyPI.
 ## Usage
 
 ```yaml
-uses: qiboteam/workflow/.github/workflows/wheels.yml@v2
+uses: qiboteam/workflow/.github/workflows/wheels.yml@uv
 with:
   inputs:
     # The used os.
@@ -18,10 +18,10 @@ with:
     # will be published.
     # Default: false
     publish: true
-    # poetry extra flags to add
+    # uv sync extra flags to add
     # to package's installation.
     # Default: ""
-    poetry-extras: ""
+    uv-extras: ""
 
 secrets:
   # Token to publish

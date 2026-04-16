@@ -7,8 +7,8 @@ on:
         description: "Used python version"
         required: true
         type: string
-      poetry-extras:
-        description: "poetry extra flags"
+      uv-extras:
+        description: "uv sync extra flags"
         required: false
         type: string
         default: ""
@@ -22,15 +22,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: qiboteam/workflows/actions/poetry/setup@v2
+      - uses: qiboteam/workflows/actions/uv/setup@uv
         with:
           python-version: ${{ inputs.python-version }}
       - name: Install project
-        run: poetry install ${{ inputs.poetry-extras }}
-      - name: Install dependencies and compile the documentation with poetry
+        run: uv sync ${{ inputs.uv-extras }}
+      - name: Install dependencies and compile the documentation
         run: |
           sudo apt install pandoc
-          poe docs
+          uvx --from poethepoet poe docs
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:

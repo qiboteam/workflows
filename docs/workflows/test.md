@@ -1,6 +1,6 @@
 # `test.yml`
 
-The workflow runs the tests and the documentation examples of the packages managed by poetry.
+The workflow runs the tests and the documentation examples of the packages managed by uv.
 It also can evaluate the coverage and update codecov.
 
 If dependabot is present in the repo and the `codecov_token` is used, this could generate [issues](https://github.com/qiboteam/qibocal/pull/238), since dependabot has no access to the repo secrets.
@@ -10,7 +10,7 @@ For public repos, the `codecov_token` is not [required](https://docs.codecov.com
 ## Usage
 
 ```yaml
-uses: qiboteam/workflow/.github/workflows/test.yml@v2
+uses: qiboteam/workflow/.github/workflows/test.yml@uv
 with:
   inputs:
     # The used os.
@@ -19,10 +19,10 @@ with:
     # The python version to be installed.
     # Mandatory input
     python-version: "3.11"
-    # poetry extra flags to add
+    # uv sync extra flags to add
     # to package's installation.
     # Default: ""
-    poetry-extras: ""
+    uv-extras: ""
     # If 'doctest' is true the documentation
     # examples will be tested.
     # Default: false

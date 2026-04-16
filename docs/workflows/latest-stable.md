@@ -5,7 +5,7 @@ This workflow deploys the `latest` and `stable` sphinx documentations and publis
 ## Usage
 
 ```yaml
-uses: qiboteam/workflows/.github/workflows/latest-stable.yml@v2
+uses: qiboteam/workflows/.github/workflows/latest-stable.yml@uv
 with:
   # The python version to be installed.
   # Mandatory input
@@ -19,8 +19,8 @@ with:
   # Label classifing the trigger (e.g. 'latest' or 'stable')
   # Default: none
   trigger-label: latest
-  # poetry extra flags to add
+  # uv sync extra flags to add
   # to package's installation.
   # Default: ""
-  poetry-extras: ""
+  uv-extras: ""
 ```

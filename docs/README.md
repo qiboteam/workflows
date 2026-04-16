@@ -1,6 +1,6 @@
 The repository **qiboteam/workflow** is a collection of **reusable workflows** used
 across the qiboteam organization. The workflows are availaible in the folder
-[`github/workflows`](https://github.com/qiboteam/workflows/tree/v2/.github/workflows).
+[`github/workflows`](https://github.com/qiboteam/workflows/tree/uv/.github/workflows).
 
 # Available workflows
 

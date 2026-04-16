@@ -11,9 +11,9 @@ runs:
     - name: Type-check
       shell: bash
       run: |
-        poe types
+        uvx --from poethepoet poe types
     - name: Lint
       shell: bash
       run: |
-        poe lint
-        poe lint-warnings
+        uvx --from poethepoet poe lint
+        uvx --from poethepoet poe lint-warnings

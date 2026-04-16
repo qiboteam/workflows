@@ -2,5 +2,5 @@
 
 Workflows building blocks.
 
-- [poetry](./poetry/)
+- [uv](./uv/)
 - [docs](./docs/)

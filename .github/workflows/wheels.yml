@@ -13,7 +13,7 @@ on:
         required: false
         type: boolean
         default: false
-      poetry-extras:
+      uv-extras:
         required: false
         type: string
         default: ""
@@ -33,15 +33,15 @@ jobs:
         shell: bash
     steps:
       - uses: actions/checkout@v6
-      - uses: qiboteam/workflows/actions/poetry/setup@v2
+      - uses: qiboteam/workflows/actions/uv/setup@uv
         with:
           python-version: ${{ inputs.python-version }}
       - name: Install project
-        run: poetry install ${{ inputs.poetry-extras }}
+        run: uv sync ${{ inputs.uv-extras }}
       - name: Package the distribution
         run: |
           # package the pure python wheel
-          poetry build
+          uv build
       - name: Publish distribution to PyPI
         if: ${{ inputs.publish }}
         uses: pypa/gh-action-pypi-publish@release/v1

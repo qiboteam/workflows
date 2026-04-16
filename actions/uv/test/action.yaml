@@ -21,16 +21,13 @@ runs:
     - name: Test
       shell: bash
       run: |
-        poe test
+        uvx --from poethepoet poe test
     - name: Test documentation examples
       shell: bash
       if: inputs.doctests != 'false'
       run: |
         sudo apt install pandoc
-        eval $(poetry env activate)
-        poe test-docs || make -C doc doctest  # TODO: both commands are kept, to
-                                              # preserve backwards compatibility,
-                                              # remove in next breaking change
+        uvx --from poethepoet poe test-docs
     - name: Upload coverage to Codecov
       if: startsWith(runner.os, 'Linux')
       uses: codecov/codecov-action@v6

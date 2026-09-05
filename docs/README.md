@@ -4,6 +4,7 @@ across the qiboteam organization. The workflows are availaible in the folder
 
 # Available workflows
 
+- [`ai-review`](./workflows/ai-review.md)
 - [`test`](./workflows/test.md)
 - [`wheels`](./workflows/wheels.md)
 - [`docs`](./workflows/docs.md)

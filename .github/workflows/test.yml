@@ -21,6 +21,11 @@ on:
         required: false
         type: boolean
         default: false
+      types:
+        description: "Enable the Poe types task"
+        required: false
+        type: boolean
+        default: false
     secrets:
       codecov_token:
         required: false
@@ -41,6 +46,8 @@ jobs:
       - name: Install project
         run: uv sync ${{ inputs.uv-extras }}
       - uses: qiboteam/workflows/actions/uv/analyze@uv_pytest
+        with:
+          types: ${{ toJSON(inputs.types) }}
 
   test:
     runs-on: ${{ inputs.os }}

@@ -2,13 +2,20 @@ name: Analyze
 description: |
   Scan Python code statically.
   Invoking:
-    - type-checker
+    - optional type-checker
     - linter
+
+inputs:
+  types:
+    description: "Enable the Poe `types` task."
+    required: false
+    default: "false"
 
 runs:
   using: composite
   steps:
     - name: Type-check
+      if: inputs.types == 'true'
       shell: bash
       run: |
         uv run --with poethepoet poe types

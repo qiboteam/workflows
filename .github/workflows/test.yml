@@ -35,24 +35,24 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - uses: qiboteam/workflows/actions/uv/setup@uv
+      - uses: qiboteam/workflows/actions/uv/setup@uv_pytest
         with:
           python-version: ${{ inputs.python-version }}
       - name: Install project
         run: uv sync ${{ inputs.uv-extras }}
-      - uses: qiboteam/workflows/actions/uv/analyze@uv
+      - uses: qiboteam/workflows/actions/uv/analyze@uv_pytest
 
   test:
     runs-on: ${{ inputs.os }}
 
     steps:
       - uses: actions/checkout@v6
-      - uses: qiboteam/workflows/actions/uv/setup@uv
+      - uses: qiboteam/workflows/actions/uv/setup@uv_pytest
         with:
           python-version: ${{ inputs.python-version }}
       - name: Install project
         run: uv sync ${{ inputs.uv-extras }}
-      - uses: qiboteam/workflows/actions/uv/test@uv
+      - uses: qiboteam/workflows/actions/uv/test@uv_pytest
         with:
           doctests: ${{ toJSON(inputs.doctests) }}
           codecov_token: ${{ secrets.codecov_token }}

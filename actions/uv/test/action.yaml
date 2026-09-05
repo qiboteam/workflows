@@ -21,7 +21,7 @@ runs:
     - name: Test
       shell: bash
       run: |
-        uv run --with poethepoet poe test
+        uv run --with poethepoet --with pytest --with pytest-cov poe test
     - name: Test documentation examples
       shell: bash
       if: inputs.doctests != 'false'

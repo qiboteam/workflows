@@ -22,5 +22,5 @@ runs:
     - name: Lint
       shell: bash
       run: |
-        uv run --with poethepoet poe lint
-        uv run --with poethepoet poe lint-warnings
+        uv run --with poethepoet --with ruff poe lint
+        uv run --with poethepoet --with ruff poe lint-warnings

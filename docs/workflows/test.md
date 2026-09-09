@@ -27,6 +27,9 @@ with:
     # examples will be tested.
     # Default: false
     doctests: true
+    # Run the optional Poe `types` task.
+    # Default: false
+    types: true
 
 secrets:
   # Token to update codecov.

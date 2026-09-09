@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies and compile the documentation
         run: |
           sudo apt install pandoc
-          uvx --from poethepoet poe docs
+          uv run --no-dev --with poethepoet poe docs
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:

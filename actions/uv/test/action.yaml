@@ -21,13 +21,13 @@ runs:
     - name: Test
       shell: bash
       run: |
-        uv run --no-deps --with poethepoet --with pytest --with pytest-cov poe test
+        uv run --no-dev --with poethepoet --with pytest --with pytest-cov poe test
     - name: Test documentation examples
       shell: bash
       if: inputs.doctests != 'false'
       run: |
         sudo apt install pandoc
-        uv run --no-deps --with poethepoet poe test-docs
+        uv run --no-dev --with poethepoet poe test-docs
     - name: Upload coverage to Codecov
       if: startsWith(runner.os, 'Linux')
       uses: codecov/codecov-action@v6

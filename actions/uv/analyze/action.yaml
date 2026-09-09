@@ -18,10 +18,10 @@ runs:
       if: inputs.types == 'true'
       shell: bash
       run: |
-        uv run --with poethepoet poe types
+        uv run --no-dev --with poethepoet poe types
     - name: Lint
       shell: bash
       run: |
         # TODO: remove ruff and revisit analyze step for all workflows.
-        uv run --no-deps --with poethepoet --with ruff poe lint
-        uv run --no-deps --with poethepoet --with ruff poe lint-warnings
+        uv run --no-dev --with poethepoet --with ruff poe lint
+        uv run --no-dev --with poethepoet --with ruff poe lint-warnings

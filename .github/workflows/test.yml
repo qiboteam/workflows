@@ -47,7 +47,7 @@ jobs:
         run: uv sync ${{ inputs.uv-extras }}
       - uses: qiboteam/workflows/actions/uv/analyze@uv_pytest
         with:
-          types: ${{ toJSON(inputs.types) }}
+          types: ${{ inputs.types }}
 
   test:
     runs-on: ${{ inputs.os }}

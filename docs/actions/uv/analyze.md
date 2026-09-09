@@ -6,7 +6,7 @@ also run a project's optional `poe types` task.
 ## Usage
 
 ```yaml
-- uses: qiboteam/workflows/actions/uv/analyze@uv_pytest
+- uses: qiboteam/workflows/actions/uv/analyze@uv
   with:
     types: true
 ```

@@ -22,5 +22,6 @@ runs:
     - name: Lint
       shell: bash
       run: |
-        uv run --with poethepoet --with ruff poe lint
-        uv run --with poethepoet --with ruff poe lint-warnings
+        # TODO: remove ruff and revisit analyze step for all workflows.
+        uv run --no-deps --with poethepoet --with ruff poe lint
+        uv run --no-deps --with poethepoet --with ruff poe lint-warnings

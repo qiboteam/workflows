@@ -10,7 +10,7 @@
 #   jobs:
 #     ai-review:
 #       if: contains(github.event.pull_request.labels.*.name, 'run-qibot')
-#       uses: qiboteam/workflows/.github/workflows/ai-review.yml@main
+#       uses: qiboteam/workflows/.github/workflows/ai-review.yml@aireviewer
 #       with:
 #         pr-number: ${{ github.event.pull_request.number }}
 #       secrets:

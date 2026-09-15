@@ -37,7 +37,7 @@ on:
 jobs:
   ai-review:
     if: contains(github.event.pull_request.labels.*.name, 'run-qibot')
-    uses: qiboteam/workflows/.github/workflows/ai-review.yml@main
+    uses: qiboteam/workflows/.github/workflows/ai-review.yml@uv
     with:
       # Number of the pull request to review.
       # Mandatory input

@@ -10,7 +10,7 @@
 #   jobs:
 #     ai-review:
 #       if: contains(github.event.pull_request.labels.*.name, 'run-qibot')
-#       uses: qiboteam/workflows/.github/workflows/ai-review.yml@aireviewer
+#       uses: qiboteam/workflows/.github/workflows/ai-review.yml@uv
 #       with:
 #         pr-number: ${{ github.event.pull_request.number }}
 #       secrets:
@@ -160,7 +160,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: qiboteam/workflows
-          ref: aireviewer
+          ref: uv
           path: .qiboteam-workflows
           fetch-depth: 1
 

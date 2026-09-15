@@ -160,7 +160,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: qiboteam/workflows
-          ref: aireview
+          ref: aireviewer
           path: .qiboteam-workflows
           fetch-depth: 1
 

@@ -34,7 +34,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -67,7 +67,17 @@ jobs:
     needs: [build, check-label]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      # Fetch the previously deployed versions from a durable, versioned
+      # source (the docs-state branch) instead of the live website, which is
+      # served through a CDN and may return stale content.
+      - name: Checkout docs state branch (if it exists)
+        id: state_checkout
+        uses: actions/checkout@v6
+        with:
+          ref: docs-state
+          fetch-depth: 0
+          path: prev_docs
+        continue-on-error: true
       - name: generate the ${{inputs.trigger-label}} documentation
         run: |
           label=${{inputs.trigger-label}}
@@ -79,7 +89,7 @@ jobs:
         with:
           name: documentation
           path: new_docs/${{inputs.trigger-label}}
-      - name: generate the remaning documentation
+      - name: generate the remaining documentation
         run: |
           label=${{inputs.trigger-label}}
           cd new_docs
@@ -89,14 +99,15 @@ jobs:
             missing_doc="latest"
           fi
           echo $missing_doc
-          URL="${{ inputs.url }}/${{ inputs.project }}/${missing_doc}.tar.gz"
-          echo $URL
-          # Check if it is possible to connect to the website
-          if wget $URL; then
-              tar -xvzf "${missing_doc}.tar.gz"
+          # Prefer the previous version from the durable docs-state branch.
+          # The live site is CDN-cached and can serve stale content, which
+          # previously caused a freshly deployed version to be rolled back.
+          if [[ -f ../prev_docs/${missing_doc}.tar.gz ]]; then
+            echo "Using ${missing_doc} from docs-state branch"
+            tar -xvzf "../prev_docs/${missing_doc}.tar.gz"
           else
-            # Otherwise it copies the existing docs
-              cp -va "${label}"/. "${missing_doc}"
+            echo "No previous ${missing_doc} found; copying current build"
+            cp -va "${label}"/. "${missing_doc}"
           fi
       - name: generate the *.tar.gz
         run: |
@@ -108,6 +119,18 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: new_docs
+      # Persist the newly assembled versions so the next run can reuse them.
+      - name: Push updated docs state
+        continue-on-error: true
+        run: |
+          cd new_docs
+          git init
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add latest.tar.gz stable.tar.gz
+          git commit -m "Update docs state (trigger: ${{inputs.trigger-label}})"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git push --force origin HEAD:docs-state
 
   # Deployment job
   # TODO: use the matrix of versions we want to implement

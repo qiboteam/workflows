@@ -122,6 +122,8 @@ jobs:
       # Persist the newly assembled versions so the next run can reuse them.
       - name: Push updated docs state
         continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           cd new_docs
           git init

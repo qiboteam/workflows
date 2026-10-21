@@ -34,6 +34,13 @@ defaults:
   run:
     shell: bash
 
+# Cancel superseded runs: a new push to the same branch/PR cancels older runs.
+# Group = caller's workflow + ref (branch, or refs/pull/N/merge for PRs) +
+# matrix inputs, so sibling matrix entries don't cancel each other.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.os }}-${{ inputs.python-version }}
+  cancel-in-progress: true
+
 jobs:
   analyze:
     runs-on: ${{ inputs.os }}
